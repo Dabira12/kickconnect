@@ -1,0 +1,86 @@
+
+
+
+
+<div class="container mx-auto">
+  <h2>Add a new listing</h2>
+  <%= form_with model: @listing do |form|%>
+      <% if form.object.errors.any? %>
+          <div>
+          <% form.object.errors.full_messages.each do |message| %>
+              <div> <%= message %> </div>
+        
+          <% end %>
+          </div>
+      <% end %>
+      <h3> Details </h3>
+      <div class = "row">
+      
+          <div class = "col">
+              <%= form.label :department, 'Department' %>
+              <%= form.select :department, [['Menswear','menswear'],['Womenswear','womenswear']],{},class:"form-select"%>
+          </div>
+      
+          <div class = "col">
+          <%= form.label :category, 'Category' %>
+          <%= form.select :category, [['Top','top'],['Bottom','bottom'],['Footwear','footwear'],['Outerwear','outerwear']],{},class:"form-select"%>
+          </div>
+
+          <div class="col">
+          <%= form.label :brand, 'Brand' %>
+          <%= form.text_field :brand, placeholder:'Brand',class:"form-control" %>
+          </div>
+      <div>
+      <h4> Item Name </h4>
+      <%=form.text_field :name,placeholder: "Item",class:"form-control " %>
+    </div>
+      <br/>
+
+      <div>
+      <h4> Color </h4>
+      <%=form.text_field :colour,placeholder: "Item colour, i.e 'Sky blue' " ,class:"form-control "%>
+      </div>
+
+      <h4> Condition </h4>
+      <div>
+      <%= form.select :condition, [['New/Never Worn','never_worn'],['Gently used','gently_used'],['Used','Used'],['Very Worn','very_worn']],{},class:"form-select "%>
+      </div>
+
+      <h4> Price </h4>
+      <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">NGN</span>
+      <%= form.number_field :price ,placeholder: "Price in Naira" %>
+      </div>
+
+      <%= form.file_field :cover_photo, direct_upload: true%>
+
+
+
+
+
+      <%= form.hidden_field :is_sold, value: 0 %>
+      <div class = "actions">
+      <%= form.submit "Publish", class:'btn  btn-success' %>
+    </div>
+  <% end %>
+
+</div>
+<!--
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+
+
+
+
+<br>

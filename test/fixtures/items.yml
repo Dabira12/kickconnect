@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  brand: MyString
+  colour: MyString
+  is_sold: false
+  sold_at: 2023-10-03 13:55:41
+  condition: MyString
+  price: 1.5
+  department: MyString
+  category: MyString
+  sub_category: MyString
+  size: MyString
+
+two:
+  name: MyString
+  brand: MyString
+  colour: MyString
+  is_sold: false
+  sold_at: 2023-10-03 13:55:41
+  condition: MyString
+  price: 1.5
+  department: MyString
+  category: MyString
+  sub_category: MyString
+  size: MyString

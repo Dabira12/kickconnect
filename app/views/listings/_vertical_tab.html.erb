@@ -1,0 +1,64 @@
+
+<div class="hidden sm:block" >
+
+
+<a> My Listings </a>
+
+
+            <nav class="flex flex-1 flex-col" aria-label="Sidebar">
+  <ul role="list" class="-mx-2 space-y-1">
+    <div data-controller="sidebar">
+    <li>
+        <%= link_to 'For Sale', sell_sale_path, class:["text-gray-700  hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 pl-3 text-sm leading-6 font-semibold",{'bg-gray-50': current_page?(sell_sale_path)}],data:{turbo_frame: :main,action:"sidebar#click"}   %>      
+
+    </li>
+
+      <li >
+                        <%= link_to 'Sold', sell_new_path,  class:["text-gray-700 group flex gap-x-3 rounded-md p-2 pl-3 text-sm leading-6 font-semibold",{'bg-gray-50': current_page?(sell_new_path)}],data:{turbo_frame: :main,action:"sidebar#click"}  %>        
+     </li>
+   
+    </div>
+  </ul>
+</nav>
+
+
+</div>
+
+<% if false%>
+    <div data-turbo-permanent  >
+        
+            <div class="col-auto col-md-6 col-xl-2 px-sm-2 px-0">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <a> My Listings</a>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <div  data-controller="sidebar">
+                           
+                            <li class="nav-item">
+                            <%= link_to 'For Sale', sell_sale_path, class:["nav-link",{'active': current_page?(sell_sale_path)}],data:{turbo_frame: :main,action:"sidebar#click"}   %>      
+                            </li>
+                        </div>
+                        
+                    
+
+                        <li class="nav-item">
+                        <%= link_to 'Sold', sell_sold_path,  class:["nav-link",{'active': current_page?(sell_sold_path)}],data:{turbo_frame: :main,action:"sidebar#click"}  %>        
+                        </li>
+                      
+                    
+                    </ul>
+                    <hr>
+                    
+                </div>
+            </div>
+
+    
+
+
+
+   
+    </div>
+ 
+
+<% end%>
+ 
+  

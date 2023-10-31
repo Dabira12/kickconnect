@@ -1,0 +1,86 @@
+<div class="container mx-auto " >
+<div class = "flex flex-row mt-8 mb-8 justify-stretch ">
+    <h1 class="font-semibold text-lg"> <%= current_user.email%> </h1>
+
+
+    <%= link_to '+ NEW LISTING', new_listing_path, class:"rounded-sm bg-green-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"%>
+
+</div>
+    <div class="flex flex-row" >
+        
+            <div class="basis-1/6 hidden sm:block" >
+                
+                <%=render 'listings/vertical_tab'%>
+
+            </div>
+            
+            
+         
+               
+                <div class="basis-5/6 pl-20">
+
+                <h1> For sale </h1>
+                       <div class="mt-10 grid grid-cols-1  gap-x-20 gap-y-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4" >
+                           <% @listings.each do |listing| %>
+                            <div  class="col-span-2">
+
+                                <div class="flex ">
+                                    <div class="flex-none w-48 relative">
+                                      
+                                         <%=image_tag listing.cover_photo.variant(resize_and_pad: [300, 300,background: [242, 242, 242]])%>
+                                    </div>
+
+                                    <div class="flex-auto p-6">
+                                        <div class="flex flex-wrap">
+                                        
+                                            <h1 class="flex-auto text-lg font-semibold text-slate-900">
+                                               <%= listing.name%>
+                                            </h1>
+
+                                            <div class="">
+                                               Medium
+                                            </div>
+                                            
+                                            <div class="w-full flex-none text-sm font-medium text-slate-700 mt-2 text-lg font-semibold text-slate-500">
+                                                <%= listing.price%>
+                                            </div>
+
+                                        </div>
+                                            <div class="flex items-baseline mt-4 mb-6 pb-6 border-b border-slate-200">
+                                        
+                                            </div>
+
+                                        <div class="flex space-x-4 mb-6 text-sm font-medium">
+                                            
+                                                <button class="h-10 px-6 font-semibold rounded-md bg-black text-white" type="submit">
+                                                    Edit Listing
+                                                </button>
+                                               
+                                         
+                                      
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                                <% end %>
+
+
+
+                           
+
+
+                            
+
+                            
+
+
+                       </div> <%# grid %>
+                </div> <%#second div with basis 5/6 %> 
+               
+
+    </div>
+ </div>
+
