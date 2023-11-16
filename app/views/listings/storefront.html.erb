@@ -1,0 +1,42 @@
+<div class= "container mx-auto pt-10 pl-4">
+    <div class= "grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-8">
+   
+        <div class=" flex flex-row sm:col-span-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" color="black" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
+        <h1 class="text-xl pt-5 font-medium text-gray-900 "><%=@user.username %></h1>
+
+        </div>
+    
+     <% if user_signed_in? && current_user.username == @username %>
+        <div class=" flex flex-row sm:col-span-2 sm:col-start-3 sm:ml-8 gap-4">
+                <%=link_to 'Edit Profile', edit_user_registration_path, class:"basis-5/6 rounded-sm px-10 pt-2 bg-emerald-600 text-center text-sm border border-gray-400 font-semibold text-white shadow-sm sm:max-w-xs sm:h-1/2"%>
+
+                <div class="basis-1/6">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="35" color="emerald-600" fill="currentColor" class=" basis-1/6 bi bi-clipboard" viewBox="0 0 16 16">
+                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                    </svg>
+                </div>
+        </div>
+    <% end%>
+    
+
+    <% if user_signed_in? && current_user.username == @username %>
+        <p class="sm:col-span-3 sm:max-w-full">
+        This is your store front where you can display your listings for people to buy.
+        </p>
+
+        <p class="sm:col-span-3 sm:max-w-full">
+             Click the clipboard icon next to the edit profile button to copy the link to this store. Paste the link in your instagram bio for people to shop your store.
+        </p>
+    <% end %>
+
+                <a href="#" class=" sm:col-span-3 border-emerald-600 text-gray-700 inline-flex items-center border-b-2 px-1 pt-1 text-md font-medium sm:w-1/6 w-1/4" >Listings</a>
+
+
+
+    </div>
+</div>

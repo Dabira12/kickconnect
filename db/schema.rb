@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_30_203601) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_15_195534) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -66,7 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_30_203601) do
     t.decimal "price", precision: 10, scale: 2
     t.string "department"
     t.string "category"
-    t.string "sub_category"
+    t.string "subcategory"
     t.string "size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -86,6 +86,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_30_203601) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "address_id"
+    t.json "default_address"
+    t.integer "default_address_id"
+    t.string "username"
     t.index ["address_id"], name: "index_users_on_address_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -1,0 +1,6 @@
+<%= turbo_stream.update @target do %>
+<%= puts @subcategories%>
+    
+    <%= options_for_select @subcategories%>
+   
+<% end %>

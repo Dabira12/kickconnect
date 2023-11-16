@@ -1,0 +1,20 @@
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwuEt74q7a_ZUd7QAbCh6hqCAKjxJXtUs&libraries=places&callback=initAutocomplete" async defer>
+</script>
+
+<script>
+    let autocomplete;
+    function initAutocomplete(){
+        autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'),
+        {
+        
+            componentRestrictions:{'country': ['NG']},
+            fields: ['formatted_address', 'geometry'  ]
+        })
+    }
+</script>
+
+<div class="container mx-auto">
+<input id="autocomplete" placeholder="Enter your address" type="text"/>
+
+<div>

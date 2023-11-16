@@ -1,5 +1,30 @@
-
-<div class="bg-white">
+ <script>
+  function makePayment() {
+    FlutterwaveCheckout({
+      public_key: "FLWPUBK_TEST-26fe5dfee2bacfdf308d5dae58eead95-X",
+      tx_ref: "titic-4898148DgzMx",
+      amount: <%=@listing.price%>,
+      currency: "NGN",
+      payment_options: "card, banktransfer, ussd",
+      redirect_url: "http://localhost:3000/c",
+      meta: {
+        consumer_id: 23,
+        consumer_mac: "92a3-912ba-1192a",
+      },
+      customer: {
+        email: <%= current_user.email%>,
+        phone_number: "08102909304",
+        name: "Rose DeWitt Bukater",
+      },
+      customizations: {
+        title: "Kickconnect",
+        description: "Payment for an awesome cruise",
+        logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
+      },
+    });
+  }
+</script>
+<div class="bg-white " data-turbo="true">
 <div class="container mx-auto  px-4 pb-24 pt-16 sm:px-6 lg:px-8">
  
  
@@ -7,21 +32,43 @@
 
 
     <div class="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
+    
 
-      <div class="lg:col-span-6 flex flex-col space-y-4  border-solid border-4">
-      <h1> Shipping Address </h1>
+      <div class="lg:col-span-6 flex flex-col space-y-4  ">
+
+      <div>
+         <h1> Shipping Address </h1>
+      </div>
+
+      <div class = " flex flex-col border-solid border-4 " >
 
       <% if @address_exists == false%>
+      <div>
 
       <h1> You do not have any existing addresses </h1>
 
+      </div>
+
+ <%=link_to 'Add a New Address + ', new_address_path, data: { turbo_frame: 'modal' }, class: " underline underline-offset-1  text-bold text-green-800  font-medium" %>
+
+
+
+      <% else%>
+      <div id= "defaultAddress">
+          <%= render "defaultAddress", default_address:@default_address%>
+      </div>
+
+         <%=link_to 'Change Address + ', addresses_path, data: { turbo_frame: 'modal' }, class: " underline underline-offset-1  text-bold text-green-800  font-medium" %>
+
+      
+
       <%end %>
 
-      <%# <%= link_to "New Address", addresses_new_path, data: { turbo_frame: 'modal' } %> 
-            <%=link_to 'New Address', addresses_new_path, data: { turbo_frame: 'modal' }, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
 
+         </div>
 
-        
+         <button type="submit" onclick="makePayment()"class="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-green-800 px-8 py-3 text-base font-medium text-white hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Pay Now</button>
+
         
       </div>
 
@@ -42,10 +89,9 @@
                       <p class="mt-1 font-medium text-gray-900 sm:ml-6 sm:mt-0">$35.00</p>
                     </div>
                     <div class="mt-2 flex text-sm font-medium sm:mt-4">
-                      <a href="#" class="text-indigo-600 hover:text-indigo-500">View Product</a>
-                      <div class="ml-4 border-l border-gray-200 pl-4 sm:ml-6 sm:pl-6">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-500">Buy Again</a>
-                      </div>
+                      <%# <a href="#" class="text-indigo-600 hover:text-indigo-500">View Product</a> %>
+                        <%= link_to 'View Product', listing_path(@listing.id), class:"block px-4 py-2 text-sm text-gray-700" %>
+                      
                     </div>
                   </div>
                  

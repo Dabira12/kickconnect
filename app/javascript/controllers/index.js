@@ -4,11 +4,14 @@
 
 import { application } from "./application";
 
-import Carousel from "stimulus-carousel";
-application.register("carousel", Carousel);
+import DropdownController from "./dropdown_controller";
+application.register("dropdown", DropdownController);
 
 import HelloController from "./hello_controller";
 application.register("hello", HelloController);
+
+import ModalController from "./modal_controller";
+application.register("modal", ModalController);
 
 import PreviewsController from "./previews_controller";
 application.register("previews", PreviewsController);
@@ -16,5 +19,5 @@ application.register("previews", PreviewsController);
 import SidebarController from "./sidebar_controller";
 application.register("sidebar", SidebarController);
 
-import ModalController from "./modal_controller";
-application.register("modal", ModalController);
+import VisibilityController from "./visibility_controller";
+application.register("visibility", VisibilityController);

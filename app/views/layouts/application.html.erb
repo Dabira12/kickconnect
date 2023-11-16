@@ -11,6 +11,8 @@
 />
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
@@ -28,6 +30,8 @@
    
     <%=notice%> 
       <%= turbo_frame_tag "modal" %>
+      <%= turbo_frame_tag "form"%>
+      
      <%= yield %>
   </main>
    

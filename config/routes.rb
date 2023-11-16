@@ -8,12 +8,28 @@ Rails.application.routes.draw do
   get 'checkout/confirm', to:'checkout#confirm'
   get 'checkout/listings/:id', to:'checkout#pay', as: :checkout
 
-  get 'addresses/new', to: 'addresses#new'
+  get '/:username', to: 'listings#storefront'
 
-  get 'addresses/', to: 'addresses#show_all'
+  # get 'addresses/new', to: 'addresses#new'
+
+  # get 'addresses/', to: 'addresses#show'
+
+  # get 'addresses/put', to: 'addresses#put'
   # get 'listings/:id', to: 'items#show', as: :listing
 
-  resources :listings
+  resources :addresses do
+    
+  end
+
+  resources :listings do
+    collection do
+      get :departments
+      get :categories
+      get :subcategories
+      get :sizes
+    end
+  end
+  resources :users,  only: [:show, :edit, :update]
   root to:"home#index"
   devise_for :user
 

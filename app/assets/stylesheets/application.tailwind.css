@@ -2,10 +2,7 @@
 
 @import "tailwindcss/components";
 
-
 @import "tailwindcss/utilities";
-
-
 
 /*
 
@@ -16,3 +13,9 @@
 }
 
 */
+:root {
+  --swiper-navigation-color: green;
+  --swiper-pagination-color: green;
+  --swiper-navigation-size: 24px;
+  --swiper-navigation-sides-offset: 5px;
+}

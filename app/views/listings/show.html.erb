@@ -1,20 +1,5 @@
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/typography'),
-    ],
-  }
-  ```
--->
 
-<script src="https://checkout.flutterwave.com/v3.js"></script>
-<div class="bg-white">
+<div class="bg-white " data-turbolinks="false">
   <div class="pb-16 pt-6 sm:pb-24">
    
     <div class="mx-auto mt-8 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -37,10 +22,10 @@
   <!-- Additional required wrapper -->
   <div class="swiper-wrapper">
     <!-- Slides -->
-    <div class="swiper-slide"> <%=image_tag @listing.cover_photo.variant(resize_and_pad: [525, 700,background: [242, 242, 242]])%> </div>
+    <div class="swiper-slide"> <%=image_tag @listing.cover_photo.variant(resize_and_pad: [525, 700,background: [242, 242, 242]]), loading:'eager'%> </div>
 
     <% if @listing.supporting_photo_one.attached?%>
-      <div class="swiper-slide"> <%=image_tag @listing.supporting_photo_one.variant(resize_to_fill: [525, 700])%> </div>
+      <div class="swiper-slide"> <%=image_tag @listing.supporting_photo_one.variant(resize_to_fill: [525, 700]), loading:'eager'%> </div>
 
    <%end%>
 
@@ -77,8 +62,8 @@
   </div>
   
   <!-- If we need navigation buttons -->
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev "></div>
+  <div class="swiper-button-next "></div>
 
   
 
@@ -89,36 +74,12 @@
         </div>
 
         <div class="mt-8 lg:col-span-5">
-          <form>
             <!-- Color picker -->
             <div>
               <h2 class="text-sm font-medium text-gray-900">Color</h2>
-              <%= link_to 'try', listing_path(@listing.id), class:"block px-4 py-2 text-sm text-gray-700" %>
+              <%= @listing.colour %>
              
 
-              <fieldset class="mt-2">
-                <legend class="sr-only">Choose a color</legend>
-                <div class="flex items-center space-x-3">
-                  <!--
-                    Active and Checked: "ring ring-offset-1"
-                    Not Active and Checked: "ring-2"
-                  -->
-                  <label class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-900">
-                    <input type="radio" name="color-choice" value="Black" class="sr-only" aria-labelledby="color-choice-0-label">
-                    <span id="color-choice-0-label" class="sr-only">Black</span>
-                    <span aria-hidden="true" class="h-8 w-8 bg-gray-900 rounded-full border border-black border-opacity-10"></span>
-                  </label>
-                  <!--
-                    Active and Checked: "ring ring-offset-1"
-                    Not Active and Checked: "ring-2"
-                  -->
-                  <label class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-400">
-                    <input type="radio" name="color-choice" value="Heather Grey" class="sr-only" aria-labelledby="color-choice-1-label">
-                    <span id="color-choice-1-label" class="sr-only">Heather Grey</span>
-                    <span aria-hidden="true" class="h-8 w-8 bg-gray-400 rounded-full border border-black border-opacity-10"></span>
-                  </label>
-                </div>
-              </fieldset>
             </div>
 
             <!-- Size picker -->
@@ -126,11 +87,10 @@
             <div class="mt-8">
               <div class="flex items-center justify-between">
                 <h2 class="text-sm font-medium text-gray-900">Size</h2>
-                <a href="#" class="text-sm font-medium text-green-800 hover:text-green-900">See sizing chart</a>
+               
               </div>
 
-              <fieldset class="mt-2">
-                <legend class="sr-only">Choose a size</legend>
+             
                 <div class="grid grid-cols-3 gap-3 sm:grid-cols-6">
                   <!--
                     In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
@@ -138,60 +98,23 @@
                     Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
                   -->
                   <label class="flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 cursor-pointer focus:outline-none">
-                    <input type="radio" name="size-choice" value="XXS" class="sr-only" aria-labelledby="size-choice-0-label">
-                    <span id="size-choice-0-label">XXS</span>
+                    
+                    <span id="size-choice-0-label"><%=  @listing.size%></span>
                   </label>
-                  <!--
-                    In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
-                    Active: "ring-2 ring-indigo-500 ring-offset-2"
-                    Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
-                  -->
-                  <label class="flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 cursor-pointer focus:outline-none">
-                    <input type="radio" name="size-choice" value="XS" class="sr-only" aria-labelledby="size-choice-1-label">
-                    <span id="size-choice-1-label">XS</span>
-                  </label>
-                  <!--
-                    In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
-                    Active: "ring-2 ring-indigo-500 ring-offset-2"
-                    Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
-                  -->
-                  <label class="flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 cursor-pointer focus:outline-none">
-                    <input type="radio" name="size-choice" value="S" class="sr-only" aria-labelledby="size-choice-2-label">
-                    <span id="size-choice-2-label">S</span>
-                  </label>
-                  <!--
-                    In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
-                    Active: "ring-2 ring-indigo-500 ring-offset-2"
-                    Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
-                  -->
-                  <label class="flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 cursor-pointer focus:outline-none">
-                    <input type="radio" name="size-choice" value="M" class="sr-only" aria-labelledby="size-choice-3-label">
-                    <span id="size-choice-3-label">M</span>
-                  </label>
-                  <!--
-                    In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
-                    Active: "ring-2 ring-indigo-500 ring-offset-2"
-                    Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
-                  -->
-                  <label class="flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 cursor-pointer focus:outline-none">
-                    <input type="radio" name="size-choice" value="L" class="sr-only" aria-labelledby="size-choice-4-label">
-                    <span id="size-choice-4-label">L</span>
-                  </label>
-                  <!--
-                    In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
-                    Active: "ring-2 ring-indigo-500 ring-offset-2"
-                    Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
-                  -->
-                  <label class="flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 cursor-not-allowed opacity-25">
-                    <input type="radio" name="size-choice" value="XL" disabled class="sr-only" aria-labelledby="size-choice-5-label">
-                    <span id="size-choice-5-label">XL</span>
-                  </label>
+                  
                 </div>
-              </fieldset>
+
+                <div>
+                <h2 class="text-sm font-medium text-gray-900">Condition</h2>
+
+                 <span id="size-choice-0-label"><%= humanize_condition_enum( @listing.condition)%></span>
+               
+
+                </div>
             </div>
 
            
-          </form>
+          
 
 
           <script>
@@ -229,7 +152,7 @@
 
            <%else%>
 
-                      <button type="submit" class="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Edit Listing</button>
+                      <%=link_to 'Edit Listing', edit_listing_path(@listing.id), class:"mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"%>
 
 
           <%end%>
@@ -239,8 +162,8 @@
             <h2 class="text-sm font-medium text-gray-900">Description</h2>
 
             <div class="prose prose-sm mt-4 text-gray-500">
-              <p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.</p>
-              <p>Looking to stock your closet? The Basic tee also comes in a 3-pack or 5-pack at a bundle discount.</p>
+             
+              <p><%= @listing.description%></p>
             </div>
           </div>
 
@@ -256,12 +179,15 @@
             <dl class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
               <div class="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center">
                 <dt>
-                  <svg class="mx-auto h-6 w-6 flex-shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.115 5.19l.319 1.913A6 6 0 008.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 002.288-4.042 1.087 1.087 0 00-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 01-.98-.314l-.295-.295a1.125 1.125 0 010-1.591l.13-.132a1.125 1.125 0 011.3-.21l.603.302a.809.809 0 001.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 001.528-1.732l.146-.292M6.115 5.19A9 9 0 1017.18 4.64M6.115 5.19A8.965 8.965 0 0112 3c1.929 0 3.716.607 5.18 1.64" />
+                  
+
+                  <svg  class="mx-auto h-6 w-6 flex-shrink-0 text-gray-400" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                  <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                  <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                   </svg>
-                  <span class="mt-4 text-sm font-medium text-gray-900">International delivery</span>
+                  <span class="mt-4 text-sm font-medium text-gray-900">Location</span>
                 </dt>
-                <dd class="mt-1 text-sm text-gray-500">Get your order in 2 years</dd>
+                <dd class="mt-1 text-sm text-gray-500"> This item is in <%= @listing.location_state%></dd>
               </div>
               <div class="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center">
                 <dt>

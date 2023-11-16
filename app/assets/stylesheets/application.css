@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+:root {
+  --swiper-navigation-color: red;
+  --swiper-pagination-color: red;
+}

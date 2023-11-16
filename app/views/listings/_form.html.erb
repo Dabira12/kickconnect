@@ -1,5 +1,5 @@
  <%= form_with model: listing do |form|%>
-      <div class="space-y-8 ">
+      <div class="space-y-8 px-10 sm:px-20 pt-10 ">
         <% if form.object.errors.any? %>
             <div class="rounded-md bg-red-50 p-4">
                
@@ -17,31 +17,100 @@
             <% end %>
 
          
-         <h2 class="text-base font-semibold leading-7 text-gray-900 mt-8">Details</h2>
+         <h2 class="text-base font-semibold leading-7 text-gray-900 mt-4">Details</h2>
 
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6" >
-            
+        <div class=" grid gap-x-4 gap-y-8 grid-cols-6 sm:grid-cols-6" data-controller="dropdown"    >
+         
+           <%#[['Menswear','menswear'],['Womenswear','womenswear']] %> 
 
-           
-           
-                <div class="sm:col-span-2 sm:col-start-1">
+         
+                <div class="col-span-6 sm:col-span-3 col-start-1">
                     <%= form.label :department, 'Department',class:"block text-sm font-medium leading-6 text-gray-900" %>
-                    <%= form.select :department, [['Menswear','menswear'],['Womenswear','womenswear']],{},class:"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"%>
+                    <%= form.select :department,[['Select a department',nil],['Menswear','menswear'],['Womenswear','womenswear']],{},class:" w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6",data:{action:"change->dropdown#onDepartmentChange",dropdown_target:"departmentSelect"}%>
                 </div>
 
-                <div  class="sm:col-span-2">
+                <div  class="col-span-6 sm:col-span-3">
                 <%= form.label :category, 'Category', class:"block text-sm font-medium leading-6 text-gray-900" %>
-                <%= form.select :category, [['Top','top'],['Bottom','bottom'],['Footwear','footwear'],['Outerwear','outerwear']],{},class:"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"%>
+                
+
+                        <% if listing.category != nil%>
+                        
+                <%= form.select :category, (options_for_select getCategories(listing.department), listing.category),{prompt:"Select a department first" },class:" w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 ", data:{action:"change->dropdown#onCategoryChange",dropdown_target:"categorySelect"}%>
+
+                <% elsif (listing.id) == nil %>
+                                                  <%= form.select :category, [],{prompt:"Select a department first" },class:" w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 ", data:{action:"change->dropdown#onCategoryChange",dropdown_target:"categorySelect"}%>
+
+
+
+
+                  <% else %>
+                                <%= form.select :category, (options_for_select getCategories(listing.department), Listing.find(listing.id).category),{prompt:"Select a department first" },class:" w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 ", data:{action:"change->dropdown#onCategoryChange",dropdown_target:"categorySelect"}%>
+
+                                <%= puts Listing.find(listing.id).size%>
+
+                         <%end%>
+                      
+
+
+
                 </div>
 
-                <div class="sm:col-span-2" >
+
+                    <div  class="col-span-6 sm:col-span-3">
+                <%= form.label :subcategory, 'Subcategory', class:"block text-sm font-medium leading-6 text-gray-900" %>
+
+
+                        <% if listing.subcategory != nil%>
+                        
+                <%= form.select :subcategory, (options_for_select getSubCategories(listing.category,listing.department), listing.subcategory),{prompt:"Select a department first" },class:" w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 ", data:{dropdown_target:"subCategorySelect"}%>
+
+                <% elsif (listing.id) == nil %>
+                <%= form.select :subcategory, [],{},class:"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 ",data:{dropdown_target:"subCategorySelect"}%>
+
+
+
+
+                  <% else %>
+                                <%= form.select :subcategory, (options_for_select  getSubCategories(listing.category,listing.department), Listing.find(listing.id).subcategory),{prompt:"Select a department first" },class:" w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 ", data:{dropdown_target:"subCategorySelect"}%>
+
+                                <%= puts Listing.find(listing.id).size%>
+
+                         <%end%>
+                      
+                </div>
+
+
+                    <div  class="col-span-6 sm:col-span-3">
+                <%= form.label :size, 'Size', class:"block text-sm font-medium leading-6 text-gray-900" %>
+
+                  <% if listing.size != nil%>
+                        
+                <%= form.select :size, (options_for_select getSizes(listing.category), listing.size),{prompt:"Select a department first" },class:" w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 ", data:{dropdown_target:"sizeSelect"}%>
+
+                <% elsif (listing.id) == nil %>
+                <%= form.select :size, [],{},class:"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 ",data:{dropdown_target:"sizeSelect"}%>
+
+
+
+
+                  <% else %>
+                                <%= form.select :category, (options_for_select getSizes(listing.category), Listing.find(listing.id).subcategory),{prompt:"Select a department first" },class:" w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 ", data:{dropdown_target:"sizeSelect"}%>
+
+                          
+
+                         <%end%>
+                      
+                </div>
+
+
+                <div class="col-span-6" >
                 <%= form.label :brand, 'Brand', class:"block text-sm font-medium leading-6 text-gray-900"%>
                 <%= form.text_field :brand, placeholder:'Brand', class:"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"%>
                 </div>
 
 
-                <div class="sm:col-span-4">
-                 <%= form.label :name, 'Item Name', class:"block text-sm font-medium leading-6 text-gray-900" %>
+                <div class="col-span-6 mt-5">
+                 <%= form.label :name, 'Item Name', class:"text-base font-semibold leading-7 text-gray-900 " %>
                   
                   <div class="mt-2">
                     <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
@@ -51,9 +120,10 @@
                   </div>
                 </div>
 
+             
 
-                <div class="sm:col-span-4">
-                  <%= form.label :colour, 'Colour', class:"block text-sm font-medium leading-6 text-gray-900" %>
+                <div class="col-span-6">
+                  <%= form.label :colour, 'Colour', class:"text-base font-semibold leading-7 text-gray-900" %>
                   
                   <div class="mt-2">
                     <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
@@ -64,12 +134,12 @@
                 </div>
 
 
-                 <div  class="sm:col-span-4">
+                 <div  class="col-span-6">
                 <%= form.label :condition, 'Condition', class:"block text-sm font-medium leading-6 text-gray-900" %>
                 <%= form.select :condition, [['New/Never Worn','never_worn'],['Gently used','gently_used'],['Used','Used'],['Very Worn','very_worn']],{},class:"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"%>
                 </div>
 
-                <div class="sm:col-span-4">
+                <div class="col-span-6">
                   <%= form.label:description, 'Description *', class:"block text-sm font-medium leading-6 text-gray-900"%>
                   <div class="mt-2">
                   <%=form.text_area:description,size:"1x4",class:"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"%>
@@ -78,12 +148,12 @@
                 </div>
 
 
-                <div class="sm:col-span-4">
+                <div class="col-span-6">
                  <%= form.label :price, 'Price', class:"block text-sm font-medium leading-6 text-gray-900" %>
                   
                   <div class="mt-2">
                     <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <span class="flex select-noneitems-center pl-3 text-gray-500 sm:text-sm">NGN</span>
+                    <span class="flex select-noneitems-center pl-3 mt-1.5 text-gray-500 sm:text-sm">NGN</span>
 
                     <%= form.number_field :price, value: listing.price ? '%.2f' % listing.price : nil, min: 0, step: 0.01, class:"block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"%>
                     </div>
@@ -91,7 +161,7 @@
                 </div>
 
 
-                <div class="col-span-4" data-controller="previews" >
+                <div class="col-span-6 " data-controller="previews" >
                   <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Cover photo *</label>
                   
                   <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
@@ -108,12 +178,13 @@
                          
                         <%= form.file_field :cover_photo, data:{previews_target:"input", action:"change->previews#preview"} %>
 
-
+                         <div class="">
                         <% if listing.cover_photo.attached?%>
                                <%= image_tag listing.cover_photo, data:{previews_target:"preview"},style:"width:col-span-4 ; height: auto"%>
                         <%else%>
                                  <%= image_tag " ", data:{previews_target:"preview"},style:"width:col-span-4 ; height: auto"%>
                         <%end%>
+                        </div>
 
                    
                    
@@ -125,24 +196,25 @@
                 </div>
 
 
-                <div  class="col-span-full">
+                <div  class="col-span-4">
                 <label for="" class="block text-sm font-medium leading-6 text-gray-900">Supporting Photos (Minimum of 3) *</label>
                 </div>
 
              
-                <div class="col-span-2 col-start-1" data-controller="previews" >
+                <div class="col-span-6 col-start-1" data-controller="previews" >
                  
                   <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                     <div class="text-center">
                       <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
                       </svg>
-                      <div class="mt-4 flex text-sm leading-6 text-gray-600">
+                      <div class="mt-4 flex text-sm leading-6 text-gray-600 ">
 
                      
                     
                          
                         <%= form.file_field :supporting_photo_one, data:{previews_target:"input", action:"change->previews#preview"}%>
+                        <div class="h-full">
 
                        <% if listing.supporting_photo_one.attached?%>
                                <%= image_tag listing.supporting_photo_one, data:{previews_target:"preview"},style:"width:col-span-1 ; height: auto"%>
@@ -150,7 +222,7 @@
                              <%= image_tag " ", data:{previews_target:"preview"}%>
                         <%end%>
 
-                        
+                        </div>
                    
                       </div>
                        <p class="text-xs leading-5 text-gray-600">or drag and drop</p>
@@ -161,7 +233,7 @@
 
              
 
-                <div  class="sm:col-span-2" data-controller="previews">
+                <div  class="col-span-6" data-controller="previews">
 
                   <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                     <div class="text-center">
@@ -170,10 +242,10 @@
                       </svg>
                       <div class="mt-4 flex text-sm leading-6 text-gray-600">
                 
-                        <%= form.file_field :supporting_photo_two,  data:{previews_target:"input", action:"change->previews#preview"} %>
+                        <%= form.file_field :supporting_photo_two,  data:{previews_target:"input", action:"change->previews#preview"},class:"object-scale-down "  %>
 
                          <% if listing.supporting_photo_two.attached?%>
-                               <%= image_tag listing.supporting_photo_two, data:{previews_target:"preview"},style:"width:col-span-1 ; height: auto"%>
+                               <%= image_tag listing.supporting_photo_two, data:{previews_target:"preview"},class:"object-scale-down "%>
                         <%else%>
                              <%= image_tag " ", data:{previews_target:"preview"}%>
                         <%end%>
@@ -185,7 +257,7 @@
                   </div>
                 </div>
 
-                <div  class="sm:col-span-2">
+                <div  class="col-span-6">
                  
                   <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                     <div class="text-center">
@@ -205,7 +277,7 @@
                 </div>
 
 
-                <div  class="sm:col-span-2">
+                <div  class="col-span-6">
                   
                   <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                     <div class="text-center">
@@ -225,7 +297,7 @@
                 </div>
 
 
-                <div  class="sm:col-span-2">
+                <div  class="col-span-6">
                  
                   <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                     <div class="text-center">
@@ -234,7 +306,7 @@
                       </svg>
                        <div class="mt-4 flex text-sm leading-6 text-gray-600">
                 
-                      <%= form.file_field :supporting_photo_five,  data:{previews_target:"input", action:"change->previews#preview"} %>
+                      <%= form.file_field :supporting_photo_five,  data:{previews_target:"input", action:"change->previews#preview"}  ,class:""%>
                    
                       </div>
                        <p class="text-xs leading-5 text-gray-600">or drag and drop</p>
@@ -244,7 +316,7 @@
                 </div>
 
 
-                <div  class="sm:col-span-2">
+                <div  class="col-span-6">
                 
                   <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                     <div class="text-center">
@@ -263,18 +335,13 @@
                 </div>
 
 
-      <% if listing.is_sold == false%>
 
 
       <%= form.hidden_field :is_sold, value: 0 %>  <%# 0 represents false in the database%>
 
-      <%else%>
-
-      <%= form.hidden_field :is_sold, value: 1 %> <%# 1 represents false in the database%>
+    
 
 
-
-    <% end%>
 
         <div>
      </div>
@@ -285,3 +352,5 @@
      </div>
  
     <% end %>
+
+

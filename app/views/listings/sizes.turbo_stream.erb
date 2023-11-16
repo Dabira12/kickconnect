@@ -1,0 +1,5 @@
+<%= turbo_stream.update @target do %>
+    <%= puts @sizes%>
+    <%= options_for_select @sizes, @selected%>
+   
+<% end %>
