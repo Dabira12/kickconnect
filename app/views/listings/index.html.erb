@@ -1,27 +1,5 @@
-<div class="container-fluid">
-    <div class="row flex-nowrap "  >
-        
-            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 float-left position-sticky">
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <a> My Listings<a/>
-
-
-                    <%= turbo_frame_tag "tabs", target: "tab-content" do %>
-                           
-                        <%= link_to 'Sign Up', sell_sale_path, class:"nav-link active" %>
-
-                    <% end -%>
-                    
-                    <hr>
-                    
-                </div>
-            </div>
-            <div class="col py-3">
-                
-                <%= turbo_frame_tag "tab-content", src: sell_sale_path, loading: "eager" %>
-
-            </div>
-    </div>
+<div data-turbo="true">
+   
  </div>
 
   

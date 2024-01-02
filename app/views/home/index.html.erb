@@ -1,25 +1,25 @@
 <div>
-<div class=" bg-dotted bg-cover   " >
+<div class=" bg-dotted bg-cover pb-8 px-2 sm:px-0 md:px-2 lg:px-0  " >
 
 <div class="container mx-auto pt-10 grid grid-cols-6 place-items-center">
-<div  class="col-span-4 flex flex-col space-y-20">
+<div  class="col-span-4 flex flex-col space-y-8 sm:space-y-20">
         <div>
-                          <h1 class="text-5xl font-bold text-green text-left  font-serif inline underline decoration-emerald-600"> Nigeria's</h1>
+                          <h1 class="text-3xl sm:text-5xl  text-green text-left inline underline decoration-amber-600"> Nigeria's </h1>
 
-                  <h1 class="text-5xl font-bold text-green text-left font-serif inline"> first Online Fashion Marketplace</h1>
+                  <h1 class="text-3xl sm:text-5xl  text-green text-left inline">   First Online Fashion Marketplace</h1>
 
         </div>
 
 
         <br>
 
-        <p class="text-xl tracking-wide font-bold text-black">Sell Items from your closet and buy unique pieces.</p>
+        <p class="text-xl tracking-wide text-black">Sell Items from your closet and buy unique pieces.</p>
 
        
 
 
     <div class= >
-              <%= link_to 'Shop Now', shop_path, class:"ml-3 inline-flex items-center rounded-md bg-emerald-600 px-3 py-2 text-xl font-semibold text-white shadow-sm"%>
+              <%= link_to 'Shop Now', shop_path, class:" inline-flex items-center rounded-md bg-teal-700 px-3 py-2 text-xl text-white shadow-sm"%>
 
     </div>
       
@@ -39,81 +39,143 @@
 
 </div>
 
-<div class="bg-gray-50 bg-cover bg-no-repeat ">
+<div class="bg-gray-100 pb-10 ">
 
-<div class="container mx-auto ">
+        <div class="container mx-auto ">
+      
+                <div  >
 
-<% if false%>
-
-<h1 class=" flex items-center justify-center text-green-800 text-2xl font-bold pt-10"> How It Works</h1>
-
-<br>
-    <div  class="flex flex-row">
-        <div class= "flex flex-col items-center justify-center basis-1/2 border-r-2 border-black space-y-8">
-
-        <h1 class="text-2xl"> Sellers</h1>
+                 <turbo-frame id="sell_shop">
+                 <div class=" items-center pt-5 justify-center sm:-my-px flex space-x-8">
+            <a href="" class="border-teal-500 text-gray-900 inline-flex font-roboto items-center border-b-2 px-1 pt-1 text-md font-medium" aria-current="page">Selling</a>
+            <a href="home/sell" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700  inline-flex items-center border-b-2 px-1 pt-1 text-md font-medium">Buying</a>
+          </div>
 
 
-<svg class="u-w-4xs u-mr-2x" width="30" height="30" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M29.3584 16.481C29.1578 16.2224 28.9596 15.9588 28.7639 15.6953C28.2085 14.9633 27.2666 14.1532 27.0513 13.2382C26.8433 12.3696 27.3522 11.4546 27.6238 10.6518C27.8195 10.0711 28.0201 9.47332 28.2305 8.89504C28.3279 8.66877 28.3757 8.42436 28.3706 8.17817C28.3655 7.93199 28.3078 7.68974 28.2012 7.46764C28.0737 7.26174 27.9016 7.08692 27.6976 6.95603C27.4935 6.82514 27.2626 6.74149 27.0219 6.71124C26.425 6.59656 25.8158 6.46724 25.2261 6.3306C24.5925 6.18908 23.8341 6.11588 23.2346 5.79136C22.4444 5.3668 22.3001 4.6714 22.0114 3.88816C21.7447 3.18544 21.4707 2.46076 21.2407 1.7434C21.1477 1.46036 20.9055 0.7064 20.218 0.4502C18.936 -0.0378002 17.2235 1.536 16.2032 2.1582C15.3592 2.66816 14.6326 2.6462 13.7787 2.06792C13.0692 1.59212 12.3377 1.17976 11.5768 0.74056C11.2294 0.54536 10.8722 0.34528 10.5028 0.12812C10.3921 0.0591961 10.2669 0.0167265 10.137 0.00402842C10.0072 -0.00866964 9.87612 0.00874765 9.75412 0.0549198C9.63576 0.0982273 9.52828 0.166713 9.43913 0.255619C9.34999 0.344526 9.28132 0.451721 9.23789 0.56976C9.07642 0.99676 8.91984 1.40668 8.76571 1.8044C8.42808 2.68524 8.10758 3.5124 7.81644 4.3664C7.48127 5.3424 6.75953 5.68888 5.77357 5.86456C4.91483 6.01584 4.06098 6.20372 3.20224 6.32328C2.92822 6.36232 2.20404 6.46724 1.85418 7.10164C1.47008 7.79216 1.82238 8.52416 2.06704 9.19028C2.41934 10.1663 3.06278 11.4497 2.98205 12.494C2.90131 13.5384 2.02789 14.3167 1.43827 15.0829C1.13 15.4806 0.84131 15.8637 0.533044 16.2126C0.261476 16.5298 -0.0859351 17.0202 0.0192668 17.6473C0.136702 18.3452 0.753234 18.7038 0.953852 18.8234C1.95694 19.4066 3.7943 20.2215 4.4035 21.2317C5.01269 22.2418 4.74112 24.267 4.6873 25.4187C4.6873 25.6798 4.63837 26.4752 5.20352 26.9901C5.7173 27.4537 6.37787 27.3902 6.82804 27.3073C7.92165 27.0999 9.71987 26.4996 10.7915 26.9291C11.9193 27.3829 12.9934 29.169 13.7273 30.1011C13.8692 30.2792 14.2974 30.8331 14.9751 30.8331C15.0471 30.8345 15.1192 30.8296 15.1904 30.8184C15.6068 30.7291 15.9749 30.4881 16.2228 30.1426C16.9445 29.2593 17.6907 28.3687 18.4761 27.4976C18.6604 27.2492 18.9206 27.0673 19.2176 26.9793C19.5146 26.8913 19.8322 26.9019 20.1226 27.0096C20.5777 27.1462 21.0303 27.2878 21.4829 27.4293L22.5521 27.7611C25.2628 28.4931 25.8207 28.1125 26.0311 27.9661C26.6207 27.561 26.5644 27.0608 26.4739 26.4045C26.3375 25.3384 26.0739 24.2923 25.6885 23.2886C25.5393 22.8689 25.3509 22.1467 25.3827 21.9124C25.4268 21.5611 25.7448 21.2048 26.3222 20.851C27.1418 20.3484 27.9736 19.875 28.8006 19.387C29.2899 19.0918 29.8648 18.7551 29.9798 18.1012C30.0948 17.4472 29.696 16.93 29.3584 16.481Z" fill="#30D8A4" opacity="1" transform-origin="14.999999046325684px 15.416666032280773px" style="transform: none; transform-origin: 15px 15.4167px;">
-</path>
-<text text-anchor="middle" x="50%" y="65%" class="u-font-mono u-font-bold u-text-16" fill="#000">1</text>
-</svg>
-        <h1> Create a listing for an Item you would like to sell </h1>
-               <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/> </svg>
+                <div  >
+                
+                        <h1 class=" flex items-center justify-center text-black text-2xl font-roboto  pb-10 pt-10"> Selling is easy</h1>
 
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-2-square" viewBox="0 0 16 16">
-  <path d="M6.646 6.24v.07H5.375v-.064c0-1.213.879-2.402 2.637-2.402 1.582 0 2.613.949 2.613 2.215 0 1.002-.6 1.667-1.287 2.43l-.096.107-1.974 2.22v.077h3.498V12H5.422v-.832l2.97-3.293c.434-.475.903-1.008.903-1.705 0-.744-.557-1.236-1.313-1.236-.843 0-1.336.615-1.336 1.306Z"/>
-  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2Zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2Z"/>
-</svg>
-        <h1> When someone buys your item, you get a notication to schedule shipping through our platorm </h1>
-               <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/> </svg>
+                        <div class="grid grid-cols-1 sm:grid-cols-3   ">
+                                <div class="flex flex-col mx-4 my-4 sm:my-0 col-span-1 space-y-4 sm:col-span-1 bg-white shadow-xl rounded-lg pb-8 pt-4 px-4 ">
+                                        <%= image_tag "woman_picture3",:class=>"  w-full sm:w-8/10" %>
+                                        <h1 class="pt-2 pb-2">1. List an item for free </h1>
+                                        <p  class="pt-2">Take photos of your item, describe it, and set your price. Tap “Upload” and your listing is live.</p>
 
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-3-square" viewBox="0 0 16 16">
-  <path d="M7.918 8.414h-.879V7.342h.838c.78 0 1.348-.522 1.342-1.237 0-.709-.563-1.195-1.348-1.195-.79 0-1.312.498-1.348 1.055H5.275c.036-1.137.95-2.115 2.625-2.121 1.594-.012 2.608.885 2.637 2.062.023 1.137-.885 1.776-1.482 1.875v.07c.703.07 1.71.64 1.734 1.917.024 1.459-1.277 2.396-2.93 2.396-1.705 0-2.707-.967-2.754-2.144H6.33c.059.597.68 1.06 1.541 1.066.973.006 1.6-.563 1.588-1.354-.006-.779-.621-1.318-1.541-1.318Z"/>
-  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2Zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2Z"/>
-</svg>
-        <h1> Once the Item is delivered, you get paid! </h1>
+                                </div>
 
+                                <div class="flex flex-col mx-4 my-4 sm:my-0  col-span-1 sm:col-span-1 space-y-4  bg-white shadow-xl rounded-lg pb-8 pt-4 px-4">
+                                        <%= image_tag "dispatch-2",:class=>"   w-full sm:w-8/10" %>
+                                        <h1 class="pt-2 pb-2">2. Its Sold! Send it </h1>
+                                        <p  class="">Once your item is sold we will notify you and send a dispatch rider to you, so we can deliver the item to the buyer.</p>
 
+                                </div>
 
-             
-
-        </div>
-
-        <div class= "flex flex-col items-center justify-center basis-1/2 space-y-8">
-        <h1 class="text-2xl"> Buyers</h1>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-1-square-fill" viewBox="0 0 16 16">
-  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2Zm7.283 4.002V12H7.971V5.338h-.065L6.072 6.656V5.385l1.899-1.383h1.312Z"/>
-</svg>
-        <h1> Purchase an Item you like </h1>
-               <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/> </svg>
+                                <div class="flex flex-col mx-4 my-4 sm:my-0  col-span-1 sm:col-span-1 space-y-4  bg-white shadow-xl rounded-lg pb-8 pt-4 px-4">
+                                        <%= image_tag "paid",:class=>"   w-full sm:w-8/10" %>
+                                        <h1 class="pt-2 pb-2">3. You get paid! </h1>
+                                        <p  class="pt-2">Once the item is delivered and the buyer confirms everything is okay, you get paid!</p>
 
 
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-2-square" viewBox="0 0 16 16">
-  <path d="M6.646 6.24v.07H5.375v-.064c0-1.213.879-2.402 2.637-2.402 1.582 0 2.613.949 2.613 2.215 0 1.002-.6 1.667-1.287 2.43l-.096.107-1.974 2.22v.077h3.498V12H5.422v-.832l2.97-3.293c.434-.475.903-1.008.903-1.705 0-.744-.557-1.236-1.313-1.236-.843 0-1.336.615-1.336 1.306Z"/>
-  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2Zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2Z"/>
-</svg>
-        <h1>  You get a notfication when the seller ships your item </h1>
-               <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/> </svg>
 
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-3-square" viewBox="0 0 16 16">
-  <path d="M7.918 8.414h-.879V7.342h.838c.78 0 1.348-.522 1.342-1.237 0-.709-.563-1.195-1.348-1.195-.79 0-1.312.498-1.348 1.055H5.275c.036-1.137.95-2.115 2.625-2.121 1.594-.012 2.608.885 2.637 2.062.023 1.137-.885 1.776-1.482 1.875v.07c.703.07 1.71.64 1.734 1.917.024 1.459-1.277 2.396-2.93 2.396-1.705 0-2.707-.967-2.754-2.144H6.33c.059.597.68 1.06 1.541 1.066.973.006 1.6-.563 1.588-1.354-.006-.779-.621-1.318-1.541-1.318Z"/>
-  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2Zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2Z"/>
-</svg>
-        <h1> You get your clothes! </h1>
+                                </div>
 
+                        </div>
+                    </turbo-frame >
+
+                </div>
+
+               
+                </div>
+
+                
 
         </div>
-<% end%>
-
-  
 
 
+<%if false%>
+<div class="bg-white mt-10 container mx-auto border-4 border-teal-700 rounded-2xl p-8 hidden lg:flex flex-col h-[800px] overflow-hidden">
+<div class="grid grid-cols-2 gap-8 h-full">
+<div class=""><h3 class="text-chow-green section-title flex items-center justify-between mb-10">FAQs.</h3>
+<div class="mt-4 max-h-[610px] overflow-y-auto pb-14">
+<div class="flex lg:grid lg:gap-4"><button class="lg:border-chow-green-10 lg:border text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2 bg-black lg:bg-black text-white"><span class="flex-1 text-sm lg:text-lg">What is Chowdeck?</span><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-chow-yellow-100"><path d="m13.733 1.223.579 1.627a1.84 1.84 0 0 0 2.523 1.045l1.56-.741c1.563-.743 3.194.888 2.451 2.451l-.741 1.56a1.838 1.838 0 0 0 1.045 2.523l1.627.578c1.63.58 1.63 2.886 0 3.467l-1.627.579a1.84 1.84 0 0 0-1.045 2.523l.741 1.56c.743 1.563-.888 3.194-2.451 2.451l-1.56-.741a1.839 1.839 0 0 0-2.523 1.044l-.579 1.628c-.58 1.63-2.886 1.63-3.466 0l-.579-1.628a1.84 1.84 0 0 0-2.523-1.044l-1.56.74c-1.563.744-3.194-.887-2.451-2.45l.741-1.56A1.84 1.84 0 0 0 2.85 14.31l-1.627-.578c-1.63-.58-1.63-2.887 0-3.467l1.627-.578a1.84 1.84 0 0 0 1.048-2.523l-.742-1.56c-.743-1.564.888-3.195 2.452-2.452l1.56.742A1.84 1.84 0 0 0 9.69 2.85l.578-1.627c.578-1.63 2.884-1.63 3.464 0Z" fill="currentColor"></path></svg></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">What locations do we currently deliver to?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">What is Chowdeck wallet?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">What is Chowscore?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">What is Service fee?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">Why do we charge Service fee?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">What is Surge fee?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">Why do we charge surge fee?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">How do I create an account on Chowdeck?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">How do I update my profile?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">How do I delete a saved card?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">How do I fund / top up my Chowdeck wallet?</span></button></div></div></div><div class=""><h3 class="text-chow-green section-title flex items-center justify-between mb-10">Ans.</h3><div class="mt-4 p-2 rounded-2xl bg-teal-500 "><div class="pb-4 overflow-y-auto h-[600px] p-8 order-2 "><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-black mb-8"><path d="m13.733 1.223.579 1.627a1.84 1.84 0 0 0 2.523 1.045l1.56-.741c1.563-.743 3.194.888 2.451 2.451l-.741 1.56a1.838 1.838 0 0 0 1.045 2.523l1.627.578c1.63.58 1.63 2.886 0 3.467l-1.627.579a1.84 1.84 0 0 0-1.045 2.523l.741 1.56c.743 1.563-.888 3.194-2.451 2.451l-1.56-.741a1.839 1.839 0 0 0-2.523 1.044l-.579 1.628c-.58 1.63-2.886 1.63-3.466 0l-.579-1.628a1.84 1.84 0 0 0-2.523-1.044l-1.56.74c-1.563.744-3.194-.887-2.451-2.45l.741-1.56A1.84 1.84 0 0 0 2.85 14.31l-1.627-.578c-1.63-.58-1.63-2.887 0-3.467l1.627-.578a1.84 1.84 0 0 0 1.048-2.523l-.742-1.56c-.743-1.564.888-3.195 2.452-2.452l1.56.742A1.84 1.84 0 0 0 9.69 2.85l.578-1.627c.578-1.63 2.884-1.63 3.464 0Z" fill="currentColor"></path></svg><p class="text-lg lg:text-2xl leading-6 lg:leading-normal animate__animated animate__fadeIn Faq_answer__OFwBY"><p>Chowdeck is a technology company that provides logistics services to both vendors and consumers. This potentially allows food vendors to deliver meals seamlessly while also providing consumers with an easy platform to order meals from their favourite restaurants in their city.</p></p></div></div></div></div></div>
+<div class="bg-chow-yellow-100 container mx-auto border-4 border-black rounded-2xl p-4 h-[600px] flex flex-col lg:hidden"><div><h3 class="text-chow-green text-32 font-bold flex items-center justify-between">FAQs. <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-black lg:hidden"><path d="m13.733 1.223.579 1.627a1.84 1.84 0 0 0 2.523 1.045l1.56-.741c1.563-.743 3.194.888 2.451 2.451l-.741 1.56a1.838 1.838 0 0 0 1.045 2.523l1.627.578c1.63.58 1.63 2.886 0 3.467l-1.627.579a1.84 1.84 0 0 0-1.045 2.523l.741 1.56c.743 1.563-.888 3.194-2.451 2.451l-1.56-.741a1.839 1.839 0 0 0-2.523 1.044l-.579 1.628c-.58 1.63-2.886 1.63-3.466 0l-.579-1.628a1.84 1.84 0 0 0-2.523-1.044l-1.56.74c-1.563.744-3.194-.887-2.451-2.45l.741-1.56A1.84 1.84 0 0 0 2.85 14.31l-1.627-.578c-1.63-.58-1.63-2.887 0-3.467l1.627-.578a1.84 1.84 0 0 0 1.048-2.523l-.742-1.56c-.743-1.564.888-3.195 2.452-2.452l1.56.742A1.84 1.84 0 0 0 9.69 2.85l.578-1.627c.578-1.63 2.884-1.63 3.464 0Z" fill="currentColor"></path></svg></h3></div><div class="flex flex-col h-full"><div class="mt-4 h-[400px] overflow-y-auto pb-4"><p class="text-lg md:text-2xl leading-6 Faq_answer__OFwBY"><p>Chowdeck is a technology company that provides logistics services to both vendors and consumers. This potentially allows food vendors to deliver meals seamlessly while also providing consumers with an easy platform to order meals from their favourite restaurants in their city.</p></p></div><div class="mt-auto overflow-x-auto"><div class="flex lg:grid lg:gap-4"><button class="lg:border-chow-green-10 lg:border text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2 bg-black lg:bg-black text-white"><span class="flex-1 text-sm lg:text-lg">What is Chowdeck?</span><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-chow-yellow-100"><path d="m13.733 1.223.579 1.627a1.84 1.84 0 0 0 2.523 1.045l1.56-.741c1.563-.743 3.194.888 2.451 2.451l-.741 1.56a1.838 1.838 0 0 0 1.045 2.523l1.627.578c1.63.58 1.63 2.886 0 3.467l-1.627.579a1.84 1.84 0 0 0-1.045 2.523l.741 1.56c.743 1.563-.888 3.194-2.451 2.451l-1.56-.741a1.839 1.839 0 0 0-2.523 1.044l-.579 1.628c-.58 1.63-2.886 1.63-3.466 0l-.579-1.628a1.84 1.84 0 0 0-2.523-1.044l-1.56.74c-1.563.744-3.194-.887-2.451-2.45l.741-1.56A1.84 1.84 0 0 0 2.85 14.31l-1.627-.578c-1.63-.58-1.63-2.887 0-3.467l1.627-.578a1.84 1.84 0 0 0 1.048-2.523l-.742-1.56c-.743-1.564.888-3.195 2.452-2.452l1.56.742A1.84 1.84 0 0 0 9.69 2.85l.578-1.627c.578-1.63 2.884-1.63 3.464 0Z" fill="currentColor"></path></svg></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">What locations do we currently deliver to?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">What is Chowdeck wallet?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">What is Chowscore?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">What is Service fee?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">Why do we charge Service fee?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">What is Surge fee?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">Why do we charge surge fee?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">How do I create an account on Chowdeck?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">How do I update my profile?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">How do I delete a saved card?</span></button><button class="bg-white lg:bg-chow-green-5 lg:border-chow-green-10 lg:border text-chow-green text-left font-bold py-2 lg:py-5 px-5 leading-5 rounded-lg min-w-[250px] flex items-center mr-2"><span class="flex-1 text-sm lg:text-lg">How do I fund / top up my Chowdeck wallet?</span></button></div></div></div></div>
+</div>
+<%end%>
+
+
+</div>
+ 
+<div class="bg-white">
+  <div class="mx-auto max-w-7xl px-6 py-24 sm:pt-32 lg:px-8 lg:py-40">
+    <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+      <div class="lg:col-span-5">
+        <h2 class="text-2xl font-bold leading-10 tracking-tight text-gray-900">Frequently asked questions</h2>
+        <p class="mt-4 text-base leading-7 text-gray-600">Can’t find the answer you’re looking for? Reach out to our <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">customer support</a> team.</p>
+      </div>
+      <div class="mt-10 lg:col-span-7 lg:mt-0">
+        <dl class="space-y-10">
+          <div>
+            <dt class="text-base font-semibold leading-7 text-gray-900">How do you make holy water?</dt>
+            <dd class="mt-2 text-base leading-7 text-gray-600">You boil the hell out of it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.</dd>
+          </div>
+
+          <!-- More questions... -->
+        </dl>
+      </div>
     </div>
+  </div>
 </div>
 
-</div>
+
+
+
+
+<footer class="bg-white">
+  <div class="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
+    <div class="flex justify-center space-x-6 md:order-2">
+      <a href="#" class="text-gray-400 hover:text-gray-500">
+        <span class="sr-only">Facebook</span>
+        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
+        </svg>
+      </a>
+      <a href="#" class="text-gray-400 hover:text-gray-500">
+        <span class="sr-only">Instagram</span>
+        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+        </svg>
+      </a>
+      <a href="#" class="text-gray-400 hover:text-gray-500">
+        <span class="sr-only">Twitter</span>
+        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+        </svg>
+      </a>
+      <a href="#" class="text-gray-400 hover:text-gray-500">
+        <span class="sr-only">GitHub</span>
+        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+        </svg>
+      </a>
+      <a href="#" class="text-gray-400 hover:text-gray-500">
+        <span class="sr-only">YouTube</span>
+        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill-rule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clip-rule="evenodd" />
+        </svg>
+      </a>
+    </div>
+    <div class="mt-8 md:order-1 md:mt-0">
+      <p class="text-center text-xs leading-5 text-gray-500">&copy; <%= Time.current.year%> Enthrift. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+
 
 
 </div>

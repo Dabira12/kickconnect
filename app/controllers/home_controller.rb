@@ -6,4 +6,8 @@ class HomeController < ApplicationController
     
 
   end
+
+
+  def sell
+  end
 end

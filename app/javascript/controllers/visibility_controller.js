@@ -2,12 +2,19 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="visibility"
 export default class extends Controller {
-  static targets = ["profile"];
+  static targets = ["profile", "flash", "mobilemenu"];
   connect() {}
 
   showMenu() {
-    console.log(this.element);
     this.profileTarget.classList.toggle("hidden");
-    console.log(this.profileTarget.hidden);
+  }
+
+  hideFlash() {
+    console.log(this.flashTarget);
+    this.flashTarget.classList.add("hidden");
+  }
+
+  showMobileMenu() {
+    this.mobilemenuTarget.classList.toggle("hidden");
   }
 }

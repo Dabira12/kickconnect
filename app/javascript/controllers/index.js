@@ -21,3 +21,9 @@ application.register("sidebar", SidebarController);
 
 import VisibilityController from "./visibility_controller";
 application.register("visibility", VisibilityController);
+
+import GeneralController from "./general_controller";
+application.register("general", GeneralController);
+
+import SlimController from "./slim_controller";
+application.register("slim", SlimController);

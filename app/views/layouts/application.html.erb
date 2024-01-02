@@ -3,12 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kickconnect</title>
-    <%# <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> %>
+    <title>Enthrift</title>
     <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
 />
+
+<link rel="stylesheet" href="https://unpkg.com/slim-select@latest/dist/slimselect.css" />
+
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script src="https://checkout.flutterwave.com/v3.js"></script>
@@ -24,17 +26,33 @@
   </head>
 
   <body >
-  <main>
+ 
   
      <%= render partial:'home/newheader' %>
+    <%= render partial:'home/bottomheader' %>
+     <%= render partial:'home/mobilemenu' %>
+
+     
+     
+   <% flash.each do |type, msg| %>
+    <% if type == 'notice'%>
+ 
+     <%= render partial: "shared/notice", locals:{message: msg}%>
+     <%end%>
+
+     <% if type == 'alert'%>
+ 
+     <%= render partial: "shared/alert", locals:{message: msg}%>
+     <%end%>
+
+    <% end %>
+
    
-    <%=notice%> 
       <%= turbo_frame_tag "modal" %>
       <%= turbo_frame_tag "form"%>
       
      <%= yield %>
-  </main>
-   
+ 
 
 
      

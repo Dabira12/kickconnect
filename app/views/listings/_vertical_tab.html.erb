@@ -6,15 +6,15 @@
 
 
             <nav class="flex flex-1 flex-col" aria-label="Sidebar">
-  <ul role="list" class="-mx-2 space-y-1">
+  <ul role="list" class="pr-2">
     <div data-controller="sidebar">
     <li>
-        <%= link_to 'For Sale', sell_sale_path, class:["text-gray-700  hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 pl-3 text-sm leading-6 font-semibold",{'bg-gray-50': current_page?(sell_sale_path)}],data:{turbo_frame: :main,action:"sidebar#click"}   %>      
+        <%= link_to 'For Sale', sell_sale_path, class:["text-gray-700   group flex gap-x-3 rounded-md p-2 pl-3 text-sm leading-6 font-semibold",{'bg-gray-300': current_page?(sell_sale_path)}],data:{turbo_frame: :main,action:"sidebar#click"}   %>      
 
     </li>
 
       <li >
-                        <%= link_to 'Sold', sell_new_path,  class:["text-gray-700 group flex gap-x-3 rounded-md p-2 pl-3 text-sm leading-6 font-semibold",{'bg-gray-50': current_page?(sell_new_path)}],data:{turbo_frame: :main,action:"sidebar#click"}  %>        
+                        <%= link_to 'Sold', sell_sold_path,  class:["text-gray-700 group flex gap-x-3 rounded-md p-2 pl-3 text-sm leading-6 font-semibold",{'bg-gray-300': current_page?(sell_sold_path)}],data:{turbo_frame: :main,action:"sidebar#click"}  %>        
      </li>
    
     </div>

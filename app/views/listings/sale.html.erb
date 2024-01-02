@@ -1,14 +1,26 @@
 <div class="container mx-auto " >
-<div class = "flex flex-row mt-8 mb-8 justify-stretch ">
-    <h1 class="font-semibold text-lg"> <%= current_user.email%> </h1>
+<div class = "pt-10 pb-5 grid grid-cols-1 px-2 sm:px-0 sm:grid-cols-3 gap-x-4 gap-y-8">
 
+        <div class=" flex flex-row sm:col-span-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" color="black" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
+    <h1 class="font-semibold text-lg"> <%= current_user.username%> </h1>
+    </div>
 
-    <%= link_to '+ NEW LISTING', new_listing_path, class:"rounded-sm bg-green-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"%>
+    <div class=" sm:col-span-2 sm:col-start-3 sm:ml-8 pt-8">
+
+   
+        <%= link_to '+ NEW LISTING', new_listing_path,class:" flex w-full items-center justify-center rounded-md border border-7 border-teal-700 bg-gray-50 px-4 py-3 text-base font-medium text-black"%>
+       
+       
+    </div>
 
 </div>
     <div class="flex flex-row" >
         
-            <div class="basis-1/6 hidden sm:block" >
+            <div class="sm:basis-1/6 hidden sm:block" >
                 
                 <%=render 'listings/vertical_tab'%>
 
@@ -17,68 +29,57 @@
             
          
                
-                <div class="basis-5/6 pl-20">
+                <div class="sm:basis-5/6 px-2 sm:px-0 sm:pl-5">
 
-                <h1> For sale </h1>
-                       <div class="mt-10 grid grid-cols-1  gap-x-20 gap-y-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4" >
+                <h1 class="font-semibold text-lg"> For sale </h1>
+                       <div class="mt-5 grid grid-cols-1  gap-x-20 gap-y-8 sm:grid-cols-2" >
                            <% @listings.each do |listing| %>
-                            <div  class="col-span-2">
+                            <div  class="sm:col-span-1">
 
-                                <div class="flex ">
+                                <div class="flex flex-col ">
+
+                                <div class="flex flex-row  space-x-8">
                                     <div class="flex-none w-48 relative">
                                       
                                          <%=image_tag listing.cover_photo.variant(resize_and_pad: [300, 300,background: [242, 242, 242]])%>
                                     </div>
 
-                                    <div class="flex-auto p-6">
-                                        <div class="flex flex-wrap">
+                                    <div class="flex flex-col space-y-8">
+                                        <div class="flex flex-row">
                                         
                                             <h1 class="flex-auto text-lg font-semibold text-slate-900">
                                                <%= listing.name%>
                                             </h1>
 
-                                            <div class="">
-                                               Medium
+                                           
+                                      </div>
+
+                                            <div>
+                                                    <%= listing.brand%>
                                             </div>
+                                             <div class="">
+                                              <%= listing.size%>
+                                            </div>
+
                                             
-                                            <div class="w-full flex-none text-sm font-medium text-slate-700 mt-2 text-lg font-semibold text-slate-500">
+                                            <div class="">
                                                 <%= listing.price%>
                                             </div>
 
-                                        </div>
-                                            <div class="flex items-baseline mt-4 mb-6 pb-6 border-b border-slate-200">
-                                        
-                                            </div>
-
-                                        <div class="flex space-x-4 mb-6 text-sm font-medium">
+                                    </div>
+                                </div>
+                                <div class="flex pt-8 text-sm font-medium">
                                             
-                                                <%# <button class="h-10 px-6 font-semibold rounded-md bg-black text-white" type="submit">
-                                                    Edit Listing
-                                                </button> %>
 
-                                                <%= link_to 'Edit Listing', listing_path(listing.id), class:"block px-4 py-2 text-sm text-gray-700" %>
+                                                <%= link_to 'Edit Listing', listing_path(listing.id), class:"w-full sm:w-full  rounded-lg flex justify-center bg-teal-700 px-3 py-2 text-sm font-semibold text-white" %>
                                                
                                          
                                       
                                         </div>
-                                        
-                                        
-                                    </div>
                                 </div>
                             </div>
 
                                 <% end %>
-
-
-
-                           
-
-
-                            
-
-                            
-
-
                        </div> <%# grid %>
                 </div> <%#second div with basis 5/6 %> 
                

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_15_195534) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_07_181149) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -56,6 +56,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_195534) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+  create_table "bank_accounts", force: :cascade do |t|
+    t.string "account_number"
+    t.string "bank_code"
+    t.string "bank_name"
+    t.string "benefactor_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_bank_accounts_on_user_id"
+  end
+
   create_table "listings", force: :cascade do |t|
     t.string "name"
     t.string "brand"
@@ -74,7 +85,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_195534) do
     t.text "description"
     t.string "location_state"
     t.string "location_country"
+    t.integer "addresses_id"
+    t.string "sender_address"
+    t.index ["addresses_id"], name: "index_listings_on_addresses_id"
     t.index ["user_id"], name: "index_listings_on_user_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "buyer_id"
+    t.integer "seller_id"
+    t.integer "listing_id"
+    t.string "status"
+    t.integer "listing_price"
+    t.integer "shipping_paid"
+    t.integer "service_fee"
+    t.integer "order_total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "sender_address"
+    t.string "buyer_address"
   end
 
   create_table "users", force: :cascade do |t|
@@ -96,4 +125,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_195534) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bank_accounts", "users"
+  add_foreign_key "listings", "addresses", column: "addresses_id"
 end

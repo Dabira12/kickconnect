@@ -1,21 +1,107 @@
-<div class="container-fluid" >
-    <div class="row flex-nowrap "  >
+<div class="container mx-auto px-2 sm:px-0 " >
+     <div class= " pt-10 pb-5 grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-8">
+   
+        <div class=" flex flex-row sm:col-span-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" color="black" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
+          <h1 class="font-semibold text-lg"> <%= current_user.username%> </h1>
+
+        </div>
+    
         
-            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 float-left position-sticky">
+           <div class=" sm:col-span-2 sm:col-start-3 sm:ml-8 pt-8">
+
+   
+        <%= link_to '+ NEW LISTING', new_listing_path,class:" flex w-full items-center justify-center rounded-md border border-7 border-teal-700 bg-gray-50 px-4 py-3 text-base font-medium text-black"%>
+       
+       
+    </div>
+        
+    </div>
+    <div class="flex flex-row" >
+        
+            <div class="sm:basis-1/6 hidden sm:block" >
+                
                 <%=render 'listings/vertical_tab'%>
+
             </div>
-            <div class="col py-3">
             
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
+            
+         
                
-        
-            </div>
+                <div class="sm:basis-5/6 ">
+
+                <h1> Sold Items </h1>
+                       <div class="mt-10 grid space-y-4 sm:grid-cols-6 " >
+                           <% @listings.each do |listing| %>
+                            <div  class=" sm:col-span-6">
+
+
+                                    <div class="">
+                                        <div class="">
+                                        <div class=" grid grid-cols-3 sm:grid-cols-7 pt-5 pb-5 pr-5 ">
+                                            <div class="span-col-1 sm:span-col-2 flex flex-col ">
+                                            <div class="rounded-lg sm:aspect-none sm:h-40 sm:w-40">
+                                                  <%=image_tag listing.cover_photo.variant(resize_and_pad: [150, 150,background: [242, 242, 242]])%>
+                                            </div>
+                                            </div>
+
+                                            <div class=" pt-5 pl-10 span-col-2 sm:span-col-2 flex flex-col">
+                                                <h3 class="text-base font-medium text-gray-900">
+                                                <a href="#"><%=listing.name%></a>
+                                                </h3>
+                                                <p class="mt-2 text-sm font-medium text-gray-900"><%=listing.price%></p>
+                                            </div>
+                                            
+
+                                            
+                                         
+                                                <div class="sm:span-col-2 hidden sm:block  flex flex-col">
+                                                <dl>
+                                                    <dt class="font-medium text-gray-900">Delivery address</dt>
+                                                    <dd class="mt-3 text-gray-500">
+                                                        <%# <span class="block">Floyd Miles</span>
+                                                        <span class="block">7363 Cynthia Pass</span>
+                                                        <span class="block">Toronto, ON N3Y 4H8</span> %>
+
+                                                        <p>
+                                                            <%= listing.order.buyer_address%>
+                                                        </p>
+                                                      
+                                                    </dd>
+                                                </dl>
+                                                </div>
+
+                                              
+                                            <div class=" pt-5 pl-10 span-col-2 sm:span-col-2 flex flex-col">
+                                                <h3 class="text-base font-medium text-gray-900">
+                                                <a href="#">Status</a>
+                                                </h3>
+                                                <p class="mt-2 text-sm font-medium text-gray-900">$35.00</p>
+                                            </div>
+                                            
+
+                                                <div class="span-col-3 sm:span-col-3 flex sm:flex-col  flex-row space-x-10 sm:space-x-0 sm:space-y-8">
+                                                    
+                                                    <%= link_to 'Fulfill Order', fulfill_path(listing.order.id), class:"w-full linline-flex rounded-lg flex justify-center items-center bg-teal-700 px-10 sm:px-3 sm:py-2 text-xs sm:text-sm font-semibold text-white"%>
+                                                     <%= link_to 'View order details', order_details_path(listing.order.id), class:"w-full rounded-lg flex justify-center items-center bg-teal-700 px-10 sm:px-3 sm:py-2 text-xs sm:text-sm font-semibold text-white"%>
+
+                                                   
+                                                
+
+                                                </div>
+                                         
+                                            
+                                        </div>
+                            </div>
+
+                                <% end %>
+                       </div> <%# grid %>
+                </div> <%#second div with basis 5/6 %> 
+               
+
     </div>
  </div>
+

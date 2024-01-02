@@ -1,0 +1,84 @@
+<div class="container px-5 sm:mx-auto">
+<h1 class="font-bold text-xl pt-8  pb-8"> Order details </h1>
+
+    <div class="grid grid-cols-1 space-y-8  sm:space-y-0 sm:grid-cols-5">
+
+        <div class="col-span-1 sm:col-span-3">
+            <div class=" flex items-center bg-gray-100 w-full sm:w-3/4  flex-row justify-around  sm:space-x-20">
+                <div class="flex flex-row  space-x-8 items-center ">
+                <div class=" py-8"> <%=image_tag @order.listing.cover_photo.variant(resize_to_fill: [100, 100]), loading:'eager'%> </div>
+
+                <div class="flex flex-col">
+                    <div> <%= @order.listing.name%></div >
+                    <div> <%= @order.listing.size%></div >
+                    <div> <%= @order.listing.price%></div >
+                </div>
+
+                </div>
+
+                            <%=link_to 'View Listing', listing_path(@order.listing.id), class:"rounded-md hidden sm:block  mr-2  px-10  py-3 bg-teal-700 flex items-center text-center text-sm border border-gray-400  text-white shadow-sm "%>
+                                                        <%=link_to '>', listing_path(@order.listing.id), class:" sm:hidden pr-5   "%>
+
+
+
+                </div>
+
+        </div>
+
+        <div  class="col-span-1 sm:col-span-2">
+             <div class="flex flex-col">
+
+             <h1 class="font-bold text-l "> Buyer</h1>
+             <%= link_to @seller.username, storefront_path(@seller.username), class:"underline decoration-solid pb-10"%>
+
+              <h1 class="font-bold"> Earnings</h1>
+              <table class="border-separate border-spacing-y-3">
+               <tbody>
+  <tr >
+
+    <td>Sold price</td>
+    <td><%= @order.listing.price%></td>
+
+  </tr>
+  
+   
+   <tr >
+    <td>Yara service fee</td>
+    <td>4200</td>
+  </tr>
+
+   <tr >
+    <td>Transaction Processing Fee</td>
+    <td>4200</td>
+  </tr>
+
+  
+   
+   <tr  >
+    <td class="font-bold">Total Earnings</td>
+    <td>60000</td>
+  </tr>
+  </tbody>
+</table>
+             </div>
+        </div>
+
+         <div  class="col-span-1 sm:col-start-1 sm:col-end-3  border-b-2 pb-10 border-gray-200">
+
+
+         <h1 class="font-bold text-l pt-8 pb-8 sm:pt-0    sm:pb=0">Delivery info</h1>
+         <h1> Status: Shipped</h1>
+
+         </div>
+
+
+         <div  class="col-span-1 sm:col-start-1 sm:col-end-3    border-b-2 pb-10 border-gray-200">
+
+
+         <h1 class="font-bold text-md pt-8  pb-8">Shipping details</h1>
+         <h1><%= @order.buyer_address %></h1>
+
+         </div>
+    
+    </div>
+</div>

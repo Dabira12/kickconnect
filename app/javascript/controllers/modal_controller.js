@@ -13,7 +13,6 @@ export default class extends Controller {
     console.log(e.detail);
     if (e.detail.success == true) {
       this.hideModal();
-      window.location.reload();
     }
   }
 }
