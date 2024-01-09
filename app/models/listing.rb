@@ -56,7 +56,16 @@ class Listing < ApplicationRecord
     validates :cover_photo, presence:true
     validates :size, presence: true
 
-    # validate :validate_supporting_photos
+    validate :validate_supporting_photos
+    validate :validates_listing_price
+
+    def validates_listing_price
+        if price>299000
+            errors.add(:price,"Item price cannot be more than 300000")
+        end
+
+        
+    end
     
 
     def validate_supporting_photos
@@ -83,7 +92,7 @@ class Listing < ApplicationRecord
             count = count+ 1
         end
 
-        if count < 3
+        if count < 2
             puts'yesiii'
             errors.add(:base,"You need a minimum of 2 supporting photos")
         end

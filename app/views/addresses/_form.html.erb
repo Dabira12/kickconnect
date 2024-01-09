@@ -9,8 +9,10 @@
         autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'),
         {
         
-            componentRestrictions:{'country': ['NG']},
-            fields: ['formatted_address', 'geometry'  ]
+            // componentRestrictions:{'country': ['NG']},
+            componentRestrictions:{},
+            fields: ['formatted_address', 'geometry', "address_components"  ],
+            types:["address"]
         })
 
         autocomplete.addListener('place_changed', onPlaceChanged);
@@ -29,7 +31,7 @@
       else{
         document.getElementById('autocomplete').disabled = true;
 
-        console.log(document.getElementById('autocomplete').value)
+        // console.log(document.getElementById('autocomplete').value)
         document.getElementById('address_line1').value = document.getElementById('autocomplete').value
 
       }

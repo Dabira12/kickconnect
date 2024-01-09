@@ -7,8 +7,8 @@ class ListingsController < ApplicationController
   # before_action :can_view_listing, only: [:show]
   # before_action :can_sell, only:[:sale]
 
-  before_action :valid_bank_account, only:[:new]
-  before_action :storefront_user_exists, only:[:storefront]
+  # before_action :valid_bank_account, only:[:new]
+ before_action :storefront_user_exists, only:[:storefront]
   
   def index
     
@@ -38,7 +38,7 @@ class ListingsController < ApplicationController
 
   def show_all
    
-   
+   puts params
       
     if params[:department] != nil
       @listings = Listing.where(is_sold: false, department: params[:department])
