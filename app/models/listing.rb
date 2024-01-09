@@ -57,10 +57,10 @@ class Listing < ApplicationRecord
     validates :size, presence: true
 
     validate :validate_supporting_photos
-    validate :validates_listing_price
+    # validate :validates_listing_price
 
     def validates_listing_price
-        if price>299000
+        if self.price > 299000
             errors.add(:price,"Item price cannot be more than 300000")
         end
 

@@ -9,6 +9,7 @@ Turbo.session.drive = false; // turns off turbo for application. To use turbo on
 import "@hotwired/stimulus";
 import "./controllers";
 import * as ActiveStorage from "@rails/activestorage";
+ActiveStorage.start();
 
 const swiper = new Swiper(".swiper", {
   // Optional parameters

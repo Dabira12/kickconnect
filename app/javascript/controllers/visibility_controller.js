@@ -17,9 +17,4 @@ export default class extends Controller {
   showMobileMenu() {
     this.mobilemenuTarget.classList.toggle("hidden");
   }
-
-  hideFlash() {
-    console.log(this.flashTarget);
-    this.flashTarget.classList.add("hidden");
-  }
 }
