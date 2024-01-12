@@ -1,0 +1,26 @@
+<div id="<%= dom_id webhook %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Source:</strong>
+    <%= webhook.source %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Data:</strong>
+    <%= webhook.data %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Message:</strong>
+    <%= webhook.message %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Event:</strong>
+    <%= webhook.event %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this webhook", webhook, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

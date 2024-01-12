@@ -90,6 +90,8 @@ gem 'flutterwave_sdk', '~> 0.1.1'
 gem 'uuid', '~> 2.3', '>= 2.3.8'
 gem 'nanoid', '~> 0.1.0'
 
+gem 'phonelib', '~> 0.8.6'
+
 
 
 # gem 'json', '~> 2.6', '>= 2.6.3'

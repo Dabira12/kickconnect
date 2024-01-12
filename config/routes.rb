@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :webhooks, only: [:create,:index,:show, :destroy]
+  post 'dev/webhooks/:source', to: "webhooks#create"
   resources :listings do
     collection do
       get :departments

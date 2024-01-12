@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_07_194330) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_12_002119) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -65,6 +68,24 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_07_194330) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.index ["user_id"], name: "index_bank_accounts_on_user_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.string "brand"
+    t.string "colour"
+    t.boolean "is_sold"
+    t.datetime "sold_at"
+    t.string "condition"
+    t.float "price"
+    t.string "department"
+    t.string "category"
+    t.string "sub_category"
+    t.string "size"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "listings", force: :cascade do |t|
@@ -122,6 +143,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_07_194330) do
     t.index ["address_id"], name: "index_users_on_address_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "webhooks", force: :cascade do |t|
+    t.string "source"
+    t.jsonb "data"
+    t.string "message"
+    t.string "event"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

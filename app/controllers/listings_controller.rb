@@ -1,6 +1,8 @@
 class ListingsController < ApplicationController
   include ListingHelper
 
+  require 'phonelib'
+  
   # before_action :can_edit_listing, only:[:edit]
   before_action :signed_in, only:[:new, :edit, :sale]
   before_action :can_edit_listing, only:[ :edit]
@@ -37,6 +39,13 @@ class ListingsController < ApplicationController
   end 
 
   def show_all
+    # valid_exp =~ /(7|8|9){1}(0|1){1}[0–9]{8}\
+
+   phone = Phonelib.parse('0802337754885','NG') 
+
+   puts phone.e164
+    # puts '8023377545'.match?(valid_exp)
+
    
    puts params
       
