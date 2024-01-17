@@ -5,6 +5,7 @@ def new
     @address = current_user.addresses.build
     # @address.build_user
     @User = User.find(current_user.id)
+    puts params
 end
 
 def put
@@ -40,11 +41,60 @@ def create
   @user = User.find(current_user.id)
 
 
-
+  puts params
   if @address.save
       # @user.default_address_id = @address.id
         User.update(@user.id,:default_address_id=> @address.id)
-      render turbo_stream: [turbo_stream.replace("pay_button", partial:"order/pay_button"), turbo_stream.replace("address", partial:"addresses/show", locals:{current_address_id: @address.id, default: true, listing_id:nil})]
+        
+        # turbo_stream.replace("pay_button", partial:"order/pay_button")
+      # render turbo_stream: [ turbo_stream.replace("address", partial:"addresses/show", locals:{current_address_id: @address.id, default: true, listing_id:nil})]
+
+      # @user = User.find(current_user.id)
+      # current_listing = Listing.find(params[:id])
+      # current_listing_address = Address.find(current_listing.addresses_id)
+     
+
+      # uri = URI('https://delivery.apiideraos.com/api/v2/tariffs/allprice')
+      # body = {
+      #     type: "local",
+      #     toAddress: {
+      #       name: @address.name,
+      #       email: current_user.email,
+      #       address: @address.line1,
+      #       phone: current_user.phone_number
+      #     },
+      #     fromAddress: {
+      #       name: current_listing_address.name,
+      #       email: User.find(current_listing.user_id).email,
+      #       address: current_listing_address.line1,
+      #       phone:User.find(current_listing.user_id).phone_number
+      #     },
+      #     parcels: {
+      #       width: 32.5,
+      #       length: 32.5,
+      #       height: 32.5,
+      #       weight: 2
+      #     },
+      #     items: [
+      #       {
+      #         name: "item 1",
+      #         description: "item 1",
+      #         weight: "506.0",
+      #         category: "beauty",
+      #         amount: "46000000.0",
+      #         quantity: "23"
+      #       }
+      #     ]
+      #   }
+      # headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGVsaXZlcnktc3RhZ2luZy5hcGlpZGVyYW9zLmNvbVwvYXBpXC92MlwvYXV0aFwvbG9naW4iLCJpYXQiOjE3MDQ3NDcyNDYsImV4cCI6MTcwNTgyNzI0NiwibmJmIjoxNzA0NzQ3MjQ2LCJqdGkiOiJGMERyc1pRM3doWDZvUVZQIiwic3ViIjoxMzksInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.wJBwXBoSOBxCNJYqXdpvkaWX_3TZHDkAVhSMWztSOYg' }
+      # response = Net::HTTP.post(uri, body.to_json, headers).then(render turbo_stream: [ turbo_stream.replace("address", partial:"addresses/show", locals:{current_address_id: @address.id, default: true, listing_id:nil})])
+
+      # res= JSON.parse(response.body)
+
+      # @rates = res['data']['rates']
+
+      # puts yessjdj
+      # puts @rates
          
 
       # puts @address.id

@@ -7,6 +7,7 @@
     "@rails/activestorage": "^7.1.2",
     "@rails/request.js": "^0.0.9",
     "esbuild": "^0.19.4",
+    "jquery": "^3.7.1",
     "slim-select": "^2.6.0",
     "stimulus-carousel": "^5.0.1",
     "swiper": "^10.3.1"

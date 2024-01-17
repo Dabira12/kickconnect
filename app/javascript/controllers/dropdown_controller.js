@@ -9,6 +9,7 @@ export default class extends Controller {
     "departmentSelect",
     "subCategorySelect",
     "sizeSelect",
+    "courierSelect",
   ];
 
   onDepartmentChange(event) {

@@ -10,9 +10,11 @@ export default class extends Controller {
   }
 
   submitEnd(e) {
+    console.log("yeso");
     console.log(e.detail);
     if (e.detail.success == true) {
       this.hideModal();
     }
+    window.location.reload();
   }
 }

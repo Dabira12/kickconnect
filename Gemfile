@@ -92,6 +92,8 @@ gem 'nanoid', '~> 0.1.0'
 
 gem 'phonelib', '~> 0.8.6'
 
+gem 'nprogress-rails', '~> 0.2.0.2'
+
 
 
 # gem 'json', '~> 2.6', '>= 2.6.3'
