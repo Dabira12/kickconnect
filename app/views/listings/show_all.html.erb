@@ -6,17 +6,17 @@
 
       </div>
             
-    <div class="mx-2 sm:basis-5/6 max-w-2xl px-0 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+    <div class="mx-2  px-0 py-16 sm:px-6 sm:py-24  lg:px-8">
       <%# <h2 class="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2> %>
     
-      <div class="mt-6 grid grid-cols-2 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+      <div class="mt-6 w-full grid grid-cols-2 gap-x-12 gap-y-10 lg:gap-x-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:gap-x-12">
           <% @listings.each do |listing| %>
           <div class="col-span-1">
               <div class=" w-full overflow-hidden rounded-md  group-hover:opacity-75 ">
               
                   <%= link_to listing_path(listing.id) do%>  
 
-                      <%=image_tag listing.cover_photo.variant(resize_and_pad: [420, 440,background: [242, 242, 242]])  %>
+                      <%=image_tag listing.cover_photo.variant(resize_and_pad: [350, 390 ,background: [242, 242, 242]])  %>
 
                      
 

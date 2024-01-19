@@ -90,7 +90,9 @@ module ListingHelper
     end
 
     def getSubCategories(category,department)
-        if category == "tops"
+        if category == "reset"
+          return []
+        elsif category == "tops"
           return [['Select a sub-category',nil],['Shirts','shirts'],['T-shirts','tshirts'],['Jerseys','jerseys'],['Sweatshirts','sweatshirts'],['Polos','polos'],['Tanks','tanks']]
       
         elsif category == "bottoms" && department == "menswear"
@@ -120,7 +122,9 @@ module ListingHelper
 
 
       def getSizes(category)
-        if category == "tops"
+        if category == "reset"
+          return []
+        elsif category == "tops"
           return [['Select a size',nil],['US XXS/EU 40','usxxs'],['US XS/EU 42', 'usxs'],['US S/EU 44-46','uss'], ['US M/EU 48-50','usm'],['US L/EU 52-54','usl'],['US XL/EU 56','usxl'], ['US XXL/EU 58', 'usxxl']]
       
         elsif category == "bottoms"

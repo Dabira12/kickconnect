@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   get 'order/confirm/:id', to:'order#confirm'
   get 'order/listings/:id', to:'order#pay', as: :checkout
 
+  get 'order/listings/lazy/:id', to:'order#pay_lazy', as: :checkout_lazy
+
   
   # get 'order/addresses', to: 'addresses#index' , as: :addresses
 

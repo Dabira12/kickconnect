@@ -48,6 +48,13 @@ class OrderController < ApplicationController
 
     def pay 
         @listing = Listing.find(params[:id])
+
+
+    end
+
+
+    def pay_lazy
+        @listing = Listing.find(params[:id])
         # flw = Flutterwave.new("FLWPUBK_TEST-26fe5dfee2bacfdf308d5dae58eead95-X","FLWSECK_TEST-bc051d6049a3f37b4f52dd749f6943b5-X", "FLWSECK_TEST972670b42ec6",true)
 
         @txref = Nanoid.generate(size:14 )
@@ -115,9 +122,9 @@ class OrderController < ApplicationController
         @rates = res['data']['rates']
 
 
-        valid_rates = find_valid_rates(@rates)
+        # valid_rates = find_valid_rates(@rates)
 
-        @sorted_valid_rates = sort_valid_rates(valid_rates)
+        # @sorted_valid_rates = sort_valid_rates(valid_rates)
 
         end
 

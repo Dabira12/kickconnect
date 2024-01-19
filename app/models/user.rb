@@ -6,6 +6,7 @@ class User < ApplicationRecord
   
 
   validates :username, presence: true, uniqueness: {case_sensitive: false}
+  before_save :downcase_fields
 
   # validates :phone_number, phone:{possible:true,countries: :ng }
   validates :phone_number, presence: true
@@ -18,6 +19,10 @@ class User < ApplicationRecord
       
       errors.add(:base,"The phone number is invalid, it should be in the format 080 212 3456 or 80 212 3456")
     end 
+  end
+
+  def downcase_fields
+    self.username.downcase!
   end
 
 

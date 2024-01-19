@@ -15,11 +15,28 @@ export default class extends Controller {
   onDepartmentChange(event) {
     let department = event.target.selectedOptions[0].value;
     let target = this.categorySelectTarget.id;
+    let subCategoryTarget = this.subCategorySelectTarget.id;
+    let sizeTarget = this.sizeSelectTarget.id;
+    let reset = "reset";
     // let category = this.categorySelectTarget.id;
 
     get(`/listings/categories?target=${target}&department=${department}`, {
       responseKind: "turbo-stream",
     });
+
+    get(
+      `/listings/subcategories?target=${subCategoryTarget}&category=${reset}&department=${reset}`,
+      {
+        responseKind: "turbo-stream",
+      }
+    );
+
+    get(
+      `/listings/sizes?target=${sizeTarget}&category=${reset}&department=${reset}`,
+      {
+        responseKind: "turbo-stream",
+      }
+    );
   }
 
   onCategoryChange(event) {
