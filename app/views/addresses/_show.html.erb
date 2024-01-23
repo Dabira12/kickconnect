@@ -1,4 +1,9 @@
+
  <%= turbo_frame_tag 'address' do%>
+ <div class="hidden">
+  <%= flash[:referrer] = params[:action]%>
+  </div>
+
   <%if default== true%>
           <div>
             <h1> Shipping Address </h1>
@@ -61,6 +66,5 @@
     </div>
   <%end%>
 
-    <%end%>
-
+<%end%>  
 

@@ -12,7 +12,7 @@ def update
     if @user.update(user_params)
       if @user.saved_change_to_default_address_id
    
-        # render turbo_stream: turbo_stream.replace("address", partial:"addresses/show", locals:{current_address_id: @user.default_address_id, default: true, listing_id:nil})
+        render turbo_stream: turbo_stream.replace("address", partial:"addresses/show", locals:{current_address_id: @user.default_address_id, default: true, listing_id:nil})
   
       end
       

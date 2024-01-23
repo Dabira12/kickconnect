@@ -35,15 +35,17 @@
                                         <%= form.select :category, [],{prompt:"Select a department first" },class:" w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 ", data:{action:"change->dropdown#onCategoryChange",dropdown_target:"categorySelect"}%> <!-- This handles when the user has not yet selected a department (new page).-->
                         <%else%>
 
-                         <%= puts listing.department%>
+                        
                     <%= form.select :category, (options_for_select getCategories(listing.department), listing.category),{prompt:"Select a department first" },class:" w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 ", data:{action:"change->dropdown#onCategoryChange",dropdown_target:"categorySelect"}%> <!-- This handles when the edit page is shown and the saved category value must be shown-->
                    
                     <%end%>
 
                 <% elsif (listing.id) == nil %>
+                 
                     <%= form.select :category, [],{prompt:"Select a department first" },class:" w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 ", data:{action:"change->dropdown#onCategoryChange",dropdown_target:"categorySelect"}%> <!-- This handles when the user has not yet selected a department (new page).-->
 
                 <% else %>
+                     <% puts listing.id%>
                     <%= form.select :category, (options_for_select getCategories(listing.department), Listing.find(listing.id).category),{prompt:"Select a department first" },class:" w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 ", data:{action:"change->dropdown#onCategoryChange",dropdown_target:"categorySelect"}%> <!-- This handles when the user tries to submit an invalid form but we want to keep the category value they selected-->
 
 

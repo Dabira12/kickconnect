@@ -9,12 +9,20 @@ export default class extends Controller {
     this.element.remove();
   }
 
-  submitEnd(e) {
+  submitEndReload(e) {
     console.log("yeso");
     console.log(e.detail);
     if (e.detail.success == true) {
       this.hideModal();
     }
     window.location.reload();
+  }
+
+  submitEnd(e) {
+    console.log("yeso");
+    console.log(e.detail);
+    if (e.detail.success == true) {
+      this.hideModal();
+    }
   }
 }

@@ -55,8 +55,10 @@ class Listing < ApplicationRecord
     validates :subcategory, presence:true
     validates :cover_photo, presence:true
     validates :size, presence: true
-
+    validates :addresses_id, presence: true
+    
     validate :validate_supporting_photos
+   
     # validate :validates_listing_price
 
     def validates_listing_price
