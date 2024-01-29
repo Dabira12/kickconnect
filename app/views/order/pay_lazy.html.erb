@@ -22,44 +22,52 @@
           
             <div id="pay_button">
 
-            <h2> Please add a shipping address first in order to pay for this item</h2>
+            <h2 class="font-bold"> Please add a shipping address first in order to pay for this item</h2>
 
-              <button type="button"   class="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-teal-700 px-8 py-3 text-base font-medium text-white ">Pay Now</button>
-            </div>
+              <%# <button type="button"   class="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-teal-700 px-8 py-3 text-base font-medium text-white ">Pay Now</button>
+            </div> %>
           
             <% else%>
                <div class="span-col-1">
-              <% if @default_address!= nil%>
+              
 
+
+              <% if @can_deliver == true%>
                 <div class="font-bold">
                   <label for="location" class="block text-sm font-medium leading-6 text-gray-900">Please select a courier for shipping</label>
                   <select data-general-target="courierSelect" name="location" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                   <option></option>
                   <% for rate in @rates%>
-                     <% if rate['status'] == true %>
+                    
                  
                     <option value= <%=rate['id']%>  >
-                     <%=rate['courier']['name'] %> 
-                     (<%=rate['estimated_days'] %>) <span style:bold> -NGN <%= rate['amount']%> </span>
+                     <%=rate['carrier_name'] %> 
+                     (<%=rate['delivery_time'] %>) <span style:bold> -NGN <%= rate['amount']%> </span>
                    
                     
                     </option>
 
-                    <%end%>
+                    
                    
                     
                   <% end%>
-                <% end%>
+               
                   </select>
                 </div>
-            <%# <%end%>
+
+                                    <button type="button" data-action="click->general#makePayment"  class="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-teal-700 px-8 py-3 text-base font-medium text-white ">Pay Now</button>
+
+
+              <% else %>
+
+              <h1 class="pt-6 font-bold"> Sorry there are currently no delivery options from this seller to your address. Select another item or change your delivery address. </h1>
+             <%end%>
           
         
            
                 </div>
                 <%# <button type="button"   class="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-teal-700 px-8 py-3 text-base font-medium text-white ">Pay Now</button> %>
             
-                    <button type="button" data-action="click->general#makePayment"  class="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-teal-700 px-8 py-3 text-base font-medium text-white ">Pay Now</button>
             <%end%>
             </div>
         

@@ -1,7 +1,7 @@
 
  <%= turbo_frame_tag 'address' do%>
  <div class="hidden">
-  <%= flash[:referrer] = params[:action]%>
+  <%= flash[:reload] = 'reload'%>
   </div>
 
   <%if default== true%>
@@ -27,7 +27,7 @@
         <div>
 
         <div>
-          <%= Address.find(current_address_id).name%>
+          <%= Address.find(current_address_id).first_name%>  <%= Address.find(current_address_id).last_name%>
          </div>
 
         <div>

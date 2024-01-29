@@ -6,7 +6,7 @@ class User < ApplicationRecord
   
 
   validates :username, presence: true, uniqueness: {case_sensitive: false}
-  before_save :downcase_fields
+  before_save :downcase_fields, :phoneToInternational
 
   # validates :phone_number, phone:{possible:true,countries: :ng }
   validates :phone_number, presence: true
@@ -23,6 +23,12 @@ class User < ApplicationRecord
 
   def downcase_fields
     self.username.downcase!
+  end
+
+  def phoneToInternational
+    phone = Phonelib.parse(self.phone_number, 'NG')
+    self.phone_number = phone.e164
+
   end
 
 

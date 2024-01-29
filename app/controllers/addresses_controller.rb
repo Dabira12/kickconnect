@@ -6,6 +6,17 @@ def new
     # @address.build_user
     @User = User.find(current_user.id)
     puts params
+
+    url = URI(request.referrer).path
+    split_url = url.split('/')
+    
+    
+    if split_url.include?('order') && split_url.include?('listings')
+      
+      @reload_page = true
+    else
+      @reload_page = false
+    end
 end
 
 def put
@@ -20,6 +31,17 @@ end
 def index
   @addresses = Address.where(user_id:current_user.id)
   @user = User.find(current_user.id)
+
+  url = URI(request.referrer).path
+  split_url = url.split('/')
+    
+
+  if split_url.include?('order') && split_url.include?('listings')
+      
+    @reload_page = true
+  else
+    @reload_page = false
+  end
 
   
   # if @user.saved_change_to_addresses_id
@@ -47,7 +69,7 @@ def create
         User.update(@user.id,:default_address_id=> @address.id)
         
         # turbo_stream.replace("pay_button", partial:"order/pay_button")
-      # render turbo_stream: [ turbo_stream.replace("address", partial:"addresses/show", locals:{current_address_id: @address.id, default: true, listing_id:nil})]
+      render turbo_stream: [ turbo_stream.replace("address", partial:"addresses/show", locals:{current_address_id: @address.id, default: true, listing_id:nil})]
 
       # @user = User.find(current_user.id)
       # current_listing = Listing.find(params[:id])
@@ -118,6 +140,6 @@ def show_all
 
   private
     def address_params
-      params.require(:address).permit(:name, :line1, :line2 )
+      params.require(:address).permit(:first_name, :last_name, :line1, :zipcode, :line2, :city, :formatted_address, :google_address_components, :state, :state_code, :country_code,:phone_number, :email)
     end
 end

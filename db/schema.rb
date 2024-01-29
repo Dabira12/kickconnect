@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_23_205457) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_26_203924) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_23_205457) do
     t.string "line2"
     t.string "zipcode"
     t.boolean "is_residential"
-    t.string "name"
+    t.string "first_name"
     t.string "phone_number"
     t.string "email"
     t.string "state"
@@ -56,6 +56,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_23_205457) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.string "formatted_address"
+    t.string "google_address_components"
+    t.string "state_code"
+    t.string "last_name"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 

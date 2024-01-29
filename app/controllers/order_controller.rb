@@ -7,6 +7,7 @@ class OrderController < ApplicationController
     before_action :can_purchase, only:[:pay]
     before_action :listing_is_sold, only:[:pay, :confirm]
     before_action :can_fulfill, only:[:fulfill]
+
     def confirm
             uuid = UUID.new
         
@@ -61,7 +62,7 @@ class OrderController < ApplicationController
         
 
         puts @txref
-
+        
         # transactions = Transactions.new(flw)
 
        
@@ -82,65 +83,80 @@ class OrderController < ApplicationController
         @address_exists = current_user.addresses.any?
         if @default_address !=nil
 
-        uri = URI('https://delivery-staging.apiideraos.com/api/v2/tariffs/allprice')
-        body = {
-            type: "local",
-            toAddress: {
-              name: @default_address.name,
-              email: current_user.email,
-              address: @default_address.line1,
-              phone: current_user.phone_number
-            },
-            fromAddress: {
-              name: current_listing_address.name,
-              email: User.find(current_listing.user_id).email,
-              address: current_listing_address.line1,
-              phone:User.find(current_listing.user_id).phone_number
-            },
-            parcels: {
-              width: 32.5,
-              length: 32.5,
-              height: 32.5,
-              weight: 2
-            },
-            items: [
-              {
-                name: "item 1",
-                description: "item 1",
-                weight: "506.0",
-                category: "beauty",
-                amount: "46000000.0",
-                quantity: "23"
-              }
-            ]
-          }
-        headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGVsaXZlcnkuYXBpaWRlcmFvcy5jb21cL2FwaVwvdjJcL2F1dGhcL2xvZ2luIiwiaWF0IjoxNzA1NTI0NTkxLCJleHAiOjE3MDY2MDQ1OTEsIm5iZiI6MTcwNTUyNDU5MSwianRpIjoiMzBYVTNYeEhwUGphSFdyTyIsInN1YiI6Mjg0NywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.x7Sa9aN4Adzs3YhJMtRPGaARDlVJ1eIJUmPR28awWqg' }
+        uri = URI('https://api.terminal.africa/v1/rates/shipment/quotes')
+        body = {    
+            delivery_address: {
+                       
+                        city: @default_address.city,
+                       
+                        country: @default_address.country_code,
+                        email: @default_address.phone_number,
+                        first_name: @default_address.first_name,
+                        
+                        last_name: @default_address.last_name,
+                        line1: @default_address.line1,
+
+                        line2: @default_address.line2,
+                       
+                        phone: @default_address.phone_number,
+                        
+                        state: @default_address.state,
+                       
+                        zip: @default_address.zipcode,
+                      
+                    },
+            pickup_address: {
+                       
+                        city: current_listing_address.city,
+                        country: current_listing_address.country_code,
+                        email: current_listing_address.email,
+                        first_name: current_listing_address.first_name,
+                        
+                        last_name: current_listing_address.last_name,
+                        line1: current_listing_address.line1,
+                        line2: current_listing_address.line2,
+                        phone: current_listing_address.phone_number,
+                        state: current_listing_address.state,
+                        zip: current_listing_address.zipcode,
+                        
+                    },
+        parcel:{
+                description: 'clothing',
+               
+                items: [
+                    {
+                        description: "Shoes purchased from Shipmonk Store",
+                        name: "Rubber Boots",
+                        currency: "NGN",
+                        value: 25000,
+                        weight: 2.5,
+                        quantity: 1
+                    }
+                ],
+               
+                packaging: "PA-FP4S1LW693HVHHV8",
+               
+               
+                weight_unit: "kg",
+               
+                
+            
+            
+        }}
+        headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer sk_live_1TbW7FD0YBcPcvMks29t9OEUBskgi9UR' }
         response = Net::HTTP.post(uri, body.to_json, headers)
 
         res= JSON.parse(response.body)
 
-        @rates = res['data']['rates']
-
-
-        # valid_rates = find_valid_rates(@rates)
-
-        # @sorted_valid_rates = sort_valid_rates(valid_rates)
+        if res['status'] == false
+            @rates = []
+        else
+        @rates = res['data']
 
         end
 
-
-
-        # respond_to do |format|
-        #     format.html do
-
-        #     format.turbo_stream { render turbo_stream: turbo_stream.prepend('defaultAddress', partial: 'addresses/defaultAddress', locals: {defaultAddress: @default_address}) }
-
-        #     end
-
-        # end
-
-      puts @address_exists
-
+        @rates == [] ? @can_deliver = false : @can_deliver = true
+        end
 
     end
 

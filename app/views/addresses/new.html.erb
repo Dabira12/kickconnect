@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "modal" do%>
 
 
-  <%= render partial: "form"%>
+  <%= render partial: "form" , locals:{reload_page: @reload_page} %>
 <% end%>
