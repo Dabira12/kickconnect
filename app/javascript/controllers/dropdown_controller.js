@@ -10,7 +10,23 @@ export default class extends Controller {
     "subCategorySelect",
     "sizeSelect",
     "courierSelect",
+    "shippingPrice",
   ];
+
+  onCourierSelect(event) {
+    let selectedCourier = this.courierSelectTarget;
+
+    let courierPrice =
+      selectedCourier.options[selectedCourier.selectedIndex].dataset["amount"];
+    let shippingTarget = this.shippingPriceTarget.id;
+
+    get(
+      `/order/courierselect?shippingTarget=${shippingTarget}&courierPrice=${courierPrice}`,
+      {
+        responseKind: "turbo-stream",
+      }
+    );
+  }
 
   onDepartmentChange(event) {
     let department = event.target.selectedOptions[0].value;
@@ -58,6 +74,11 @@ export default class extends Controller {
         responseKind: "turbo-stream",
       }
     );
+  }
+
+  onFormSubmit(event) {
+    console.log("yes");
+    event.stopImmediatePropagation();
   }
 
   test() {

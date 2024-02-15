@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :webhooks, only: [:create,:index,:show, :destroy]
   post 'dev/webhooks/:source', to: "webhooks#create"
+
+  put 'order/request_courier/:id', to:'order#request_courier', as: :request_courier
+
   resources :listings do
     collection do
       get :departments
@@ -17,7 +20,7 @@ Rails.application.routes.draw do
   root to:"home#index"
   devise_for :user
   
-
+ 
   get 'sell/sale', to: 'listings#sale'
   get 'sell/index', to: 'listings#index'
   get 'sell/new', to: 'listings#new'
@@ -30,17 +33,8 @@ Rails.application.routes.draw do
 
   get 'order/listings/lazy/:id', to:'order#pay_lazy', as: :checkout_lazy
 
-  
-  # get 'order/addresses', to: 'addresses#index' , as: :addresses
+  get 'order/courierselect', to:'order#courierselect'
 
-  # post 'order/addresses', to: 'addresses#create'
-
-  # get 'order/addresses/new', to:'addresses#new', as: :new_address
-
-  # get 'order/listing/addresses/:id', to:'addresses#listing_index', as: :listing_addresses
-  # resources :addresses do
-    
-  # end
 
   get 'addresses', to:'addresses#index', as: :addresses
 

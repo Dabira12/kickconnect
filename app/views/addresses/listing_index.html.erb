@@ -42,8 +42,8 @@
        
             <%= form.radio_button :addresses_id, address.id, :checked => address.id==@listing.addresses_id %>
                 <div>
-                    <%= form.label :addresses_id, address.name, class:"block text-sm font-medium leading-6 text-gray-900" %>
-                    <%= form.label :addresses_id, address.line1, class:"block text-sm font-medium leading-6 text-gray-900" %>
+                    <%= form.label :addresses_id, address.first_name + address.last_name, class:"block text-sm font-medium leading-6 text-gray-900" %>
+                    <%= form.label :addresses_id, address.formatted_address, class:"block text-sm font-medium leading-6 text-gray-900" %>
                     
                     </div>
 

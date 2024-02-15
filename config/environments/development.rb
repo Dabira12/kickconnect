@@ -38,7 +38,7 @@ Rails.application.configure do
 
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -61,7 +61,17 @@ Rails.application.configure do
   config.assets.quiet = true
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.office365.com",
+    user_name: "office@enthrift.com",
+    password: "coco12#44",
+    port: 587,
+    authentication: :login,
+    read_timeout: 20,
+    
+    enable_starttls_auto: true
+  }
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

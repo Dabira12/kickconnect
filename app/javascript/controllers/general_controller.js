@@ -1,21 +1,44 @@
 import { Controller } from "@hotwired/stimulus";
+import { get } from "@rails/request.js";
 
 // Connects to data-controller="general"
 export default class extends Controller {
-  static values = { price: Number, listingid: Number, txref: String };
-  static targets = ["bankName", "bankCode", "courierSelect"];
+  static values = {
+    price: Number,
+    listingid: Number,
+    txref: String,
+    shipmentid: String,
+  };
+  static targets = ["bankName", "bankCode", "courierSelect", "shippingPrice"];
 
   connect() {
     console.log(document.readyState);
+    console.log(this.shipmentIdValue);
   }
 
   copyClipboard() {
     navigator.clipboard.writeText(window.location.href);
   }
 
+  onCourierSelect(event) {
+    let selectedCourier = this.courierSelectTarget;
+
+    let courierPrice =
+      selectedCourier.options[selectedCourier.selectedIndex].dataset["amount"];
+    let shippingTarget = this.shippingPriceTarget.id;
+
+    get(
+      `/order/courierselect?shippingTarget=${shippingTarget}&courierPrice=${courierPrice}`,
+      {
+        responseKind: "turbo-stream",
+      }
+    );
+  }
+
   makePayment() {
     if (this.courierSelectTarget.value != "") {
       console.log(this.courierSelectTarget.value);
+      console.log(this.shipmentidValue);
       FlutterwaveCheckout({
         public_key: "FLWPUBK_TEST-26fe5dfee2bacfdf308d5dae58eead95-X",
         tx_ref: this.txrefValue,
@@ -23,7 +46,14 @@ export default class extends Controller {
         currency: "NGN",
         payment_options: " card,banktransfer, ussd",
         redirect_url:
-          "http://localhost:3000/order/confirm/" + this.listingidValue,
+          "http://localhost:3000/order/confirm/" +
+          this.listingidValue +
+          "?" +
+          "rate_id=" +
+          this.courierSelectTarget.value +
+          "&" +
+          "shipment_id=" +
+          this.shipmentidValue,
         meta: {
           consumer_id: 23,
           consumer_mac: "92a3-912ba-1192a",

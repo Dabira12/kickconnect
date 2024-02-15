@@ -3,6 +3,7 @@ class OrderController < ApplicationController
     require 'nanoid'
     require 'httparty'
     require 'json'
+    
 
     before_action :can_purchase, only:[:pay]
     before_action :listing_is_sold, only:[:pay, :confirm]
@@ -19,20 +20,35 @@ class OrderController < ApplicationController
 
 
             current_listing = Listing.find(params[:id])
+            current_listing_address = Address.find(current_listing.addresses_id)
+
+            @default_address = Address.find_by(user_id:current_user.id, id:current_user.default_address_id)
+
+            rate_id = params[:rate_id]
 
             puts response
             if response['data']['status'] === "successful"  && response['data']['meta']['listing_id'] === params[:id] && current_listing.is_sold == false
                
 
                
-                current_listing.update_attribute(:is_sold, 1)
+            
+
+               order = Order.new(listing_id:current_listing.id, buyer_id: current_user.id, seller_id:current_listing.user.id , buyer_address:@default_address, sender_address:current_listing_address, listing_price:current_listing.price, terminal_rate_id:rate_id, status:'active')
+               order.save
+
+
+                
+                res= JSON.parse(response.body)
                    
-
-
-                Order.create!(listing_id:current_listing.id, buyer_id: current_user.id, seller_id:current_listing.user.id , buyer_address:current_user.default_address, listing_price:current_listing.price, status:'active')
+                shipment_id = params[:shipment_id]
+                order.update_attribute(:terminal_shipment_id, shipment_id)
+           
 
                 @status = 'successful'
 
+                current_listing.update_attribute(:is_sold, 1)
+                
+                
                 
                     
 
@@ -61,7 +77,6 @@ class OrderController < ApplicationController
         @txref = Nanoid.generate(size:14 )
         
 
-        puts @txref
         
         # transactions = Transactions.new(flw)
 
@@ -82,85 +97,104 @@ class OrderController < ApplicationController
         @default_address = Address.find_by(user_id:current_user.id, id:current_user.default_address_id)
         @address_exists = current_user.addresses.any?
         if @default_address !=nil
+            
 
-        uri = URI('https://api.terminal.africa/v1/rates/shipment/quotes')
-        body = {    
-            delivery_address: {
-                       
-                        city: @default_address.city,
-                       
-                        country: @default_address.country_code,
-                        email: @default_address.phone_number,
-                        first_name: @default_address.first_name,
+            # uri = URI('https://api.terminal.africa/v1/shipments/quick')
+            uri = URI('https://sandbox.terminal.africa/v1/shipments/quick')
+            body = {    
+                delivery_address: {
                         
-                        last_name: @default_address.last_name,
-                        line1: @default_address.line1,
+                            city: @default_address.city,
+                        
+                            country: @default_address.country_code,
+                            email: @default_address.phone_number,
+                            first_name: @default_address.first_name,
+                            
+                            last_name: @default_address.last_name,
+                            line1: @default_address.line1,
 
-                        line2: @default_address.line2,
-                       
-                        phone: @default_address.phone_number,
+                            line2: @default_address.line2,
                         
-                        state: @default_address.state,
-                       
-                        zip: @default_address.zipcode,
-                      
-                    },
-            pickup_address: {
-                       
-                        city: current_listing_address.city,
-                        country: current_listing_address.country_code,
-                        email: current_listing_address.email,
-                        first_name: current_listing_address.first_name,
+                            phone: @default_address.phone_number,
+                            
+                            state: @default_address.state,
                         
-                        last_name: current_listing_address.last_name,
-                        line1: current_listing_address.line1,
-                        line2: current_listing_address.line2,
-                        phone: current_listing_address.phone_number,
-                        state: current_listing_address.state,
-                        zip: current_listing_address.zipcode,
+                            zip: @default_address.zipcode,
                         
-                    },
-        parcel:{
-                description: 'clothing',
-               
-                items: [
-                    {
-                        description: "Shoes purchased from Shipmonk Store",
-                        name: "Rubber Boots",
-                        currency: "NGN",
-                        value: 25000,
-                        weight: 2.5,
-                        quantity: 1
-                    }
-                ],
-               
-                packaging: "PA-FP4S1LW693HVHHV8",
-               
-               
-                weight_unit: "kg",
-               
+                        },
+                pickup_address: {
+                        
+                            city: current_listing_address.city,
+                            country: current_listing_address.country_code,
+                            email: current_listing_address.email,
+                            first_name: current_listing_address.first_name,
+                            
+                            last_name: current_listing_address.last_name,
+                            line1: current_listing_address.line1,
+                            line2: current_listing_address.line2,
+                            phone: current_listing_address.phone_number,
+                            state: current_listing_address.state,
+                            zip: current_listing_address.zipcode,
+                            
+                        },
+                        metadata:{ buyer_id: @user.id, listing_id: @listing.id},
+            parcel:{
+                    description: 'clothing',
                 
+                    items: [
+                        {
+                            description: "Shoes purchased from Shipmonk Store",
+                            name: "Rubber Boots",
+                            currency: "NGN",
+                            value: 25000,
+                            weight: 2.5,
+                            quantity: 1
+                        }
+                    ],
+                
+                    packaging: "PA-FP4S1LW693HVHHV8",
+                
+                
+                    weight_unit: "kg",
+                
+                    
+                
+                
+            }}
+            # headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer sk_live_1TbW7FD0YBcPcvMks29t9OEUBskgi9UR' }
+            headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer sk_test_yRZJuyWvH4HALP8upPDcoaEw3JIs0yVO' }
+
+            response = Net::HTTP.post(uri, body.to_json, headers)
+
+            res= JSON.parse(response.body)
             
+            @shipment_id = res['data']['shipment_id']
+            puts @shipment_id
+            # rate_uri = URI('https://api.terminal.africa/v1/rates/shipment')
+            rate_uri = URI('https://sandbox.terminal.africa/v1/rates/shipment')
+            rate_params = {:shipment_id => @shipment_id}
+            rate_uri.query = URI.encode_www_form(rate_params)
+            rate_body= {}
+            rates_response = Net::HTTP.get_response(rate_uri,headers)
             
-        }}
-        headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer sk_live_1TbW7FD0YBcPcvMks29t9OEUBskgi9UR' }
-        response = Net::HTTP.post(uri, body.to_json, headers)
 
-        res= JSON.parse(response.body)
+            rates_res = JSON.parse(rates_response.body)
+        
 
-        if res['status'] == false
-            @rates = []
-        else
-        @rates = res['data']
+            if rates_res['status'] == false
+                @rates = []
+            else
+            @rates = rates_res['data']
 
-        end
+            end
 
-        @rates == [] ? @can_deliver = false : @can_deliver = true
-        end
+            @rates == [] ? @can_deliver = false : @can_deliver = true
+            end
 
     end
 
     def fulfill
+
         @order= Order.find(params[:id])
 
         @listing = Listing.find(@order.listing_id)
@@ -172,6 +206,7 @@ class OrderController < ApplicationController
     def details
         @order= Order.find(params[:id])
         @seller = User.find(@order.seller_id)
+        @buyer = User.find(@order.buyer_id)
     end 
 
     def purchase_details
@@ -190,6 +225,32 @@ class OrderController < ApplicationController
      
     end
 
+    def request_courier
+        # uri = URI('https://api.terminal.africa/v1/shipments/pickup')
+        uri = URI('https://sandbox.terminal.africa/v1/shipments/pickup')
+        order = Order.find(params[:id])
+        body = {
+            rate_id: order.terminal_rate_id,
+        }
+
+        # headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer sk_live_1TbW7FD0YBcPcvMks29t9OEUBskgi9UR'}
+        headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer sk_test_yRZJuyWvH4HALP8upPDcoaEw3JIs0yVO'}
+        puts order.terminal_shipment_id
+        response = Net::HTTP.post(uri, body.to_json, headers)
+        puts response.body
+
+        begin
+            
+        rescue 
+            puts 'yes'
+
+        end
+
+            puts ('yes')
+            flash[:alert] = "Before you create a listing, you must enter your bank account details so we can pay you when your item gets sold!"
+
+    end
+
     def listing_is_sold
         @listing = Listing.find(params[:id])
 
@@ -203,6 +264,18 @@ class OrderController < ApplicationController
         if order.seller_id != current_user.id
             redirect_to shop_path
         end
+    end
+
+    def courierselect
+        puts params
+        @shippingTarget = params[:shippingTarget]
+        if params[:courierPrice] == ""
+            @courierPrice = 'Please Select a courier'
+        else
+            @courierPrice = params[:courierPrice]
+        end
+       
+
     end
 
     def find_valid_rates(rates)

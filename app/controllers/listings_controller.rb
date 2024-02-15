@@ -37,17 +37,8 @@ class ListingsController < ApplicationController
   def show
     @listing = Listing.find(params[:id])
 
-    url = URI("https://api.terminal.africa/v1/cities?country_code=NG&state_code=LA")
+   
 
-    http = Net::HTTP.new(url.host, url.port);
-    http.use_ssl = true
-    request = Net::HTTP::Get.new(url)
-    request["Authorization"] = "Bearer sk_live_1TbW7FD0YBcPcvMks29t9OEUBskgi9UR"
-
-    response = http.request(request)
-    ans = JSON.parse(response.read_body)['data']
-
-    puts ans
   end 
 
   def show_all

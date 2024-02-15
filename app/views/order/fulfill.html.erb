@@ -1,4 +1,4 @@
-<div class="container px-2 sm:px-0 mx-auto md:pl-20">
+<div class="container px-2 pt-4 sm:px-0 mx-auto md:pl-20">
     <p> Congratulations someone bought your item! The full listing price and shipping has been paid for.</p>
     <br/>
     <h1> If you can the item is no longer available or the details of the item has changed such as the sender address please click cancel listing and the order will be automatically cancelled  <h1>
@@ -8,6 +8,7 @@
             <div class="sm:col-span-3"  >
             <h1> To procced please select a delivery option<h1>
             
+            <%=button_to 'Arrange Shippping', request_courier_path(@order), method: :put, class:"rounded-md  px-10  bg-teal-700 flex items-center text-center text-sm border border-gray-400 font-semibold text-white shadow-sm "%>
 
         </div>
 
@@ -24,8 +25,8 @@
             <div> <%= @listing.price%></div >
           </div>
 
-                    <%=link_to 'View Listing', listing_path(@listing.id), class:"rounded-md h-1/5 px-10  bg-teal-700 flex items-center text-center text-sm border border-gray-400 font-semibold text-white shadow-sm "%>
-
+                    <%=link_to 'View Listing', listing_path(@listing.id), class:"rounded-md  px-10  bg-teal-700 flex items-center text-center text-sm border border-gray-400 font-semibold text-white shadow-sm "%>
+                        
          </div>
 
        
