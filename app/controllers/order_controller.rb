@@ -272,7 +272,7 @@ class OrderController < ApplicationController
         if params[:courierPrice] == ""
             @courierPrice = 'Please Select a courier'
         else
-            @courierPrice = params[:courierPrice]
+            @courierPrice = "NGN " + params[:courierPrice]
         end
        
 

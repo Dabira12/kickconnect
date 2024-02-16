@@ -46,12 +46,7 @@
     <td>2000</td>
 
   </tr>
-   
-   <tr >
-    <td>Yara service fee</td>
-    <td>4200</td>
-  </tr>
-   
+  
    <tr  >
     <td class="font-bold">Order total</td>
     <td>60000</td>
@@ -69,11 +64,13 @@
 
 
          <h1 class="font-bold text-l pt-8 pb-8 sm:pt-0    sm:pb=0">Delivery info</h1>
-         <h1> Status: Shipped</h1>
+         <h1 > Status: Shipped</h1>
+          <h1 class="pt-4"> Courier: GIG Logistics</h1>
+
 
          </div>
 
-
+<%if false%>
          <div  class="col-span-1 sm:col-start-1 sm:col-end-3    border-b-2 pb-10 border-gray-200">
 
 
@@ -81,6 +78,7 @@
          <h1><%= @order.buyer_address %></h1>
 
          </div>
+  <%end%>
     
     </div>
 </div>
