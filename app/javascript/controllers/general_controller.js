@@ -8,6 +8,7 @@ export default class extends Controller {
     listingid: Number,
     txref: String,
     shipmentid: String,
+    carrier: String,
   };
   static targets = ["bankName", "bankCode", "courierSelect", "shippingPrice"];
 
@@ -25,6 +26,8 @@ export default class extends Controller {
 
     let courierPrice =
       selectedCourier.options[selectedCourier.selectedIndex].dataset["amount"];
+    this.carrierValue =
+      selectedCourier.options[selectedCourier.selectedIndex].dataset["carrier"];
     let shippingTarget = this.shippingPriceTarget.id;
 
     get(
@@ -53,10 +56,11 @@ export default class extends Controller {
           this.courierSelectTarget.value +
           "&" +
           "shipment_id=" +
-          this.shipmentidValue,
+          this.shipmentidValue +
+          "&" +
+          "carrier=" +
+          this.carrierValue,
         meta: {
-          consumer_id: 23,
-          consumer_mac: "92a3-912ba-1192a",
           listing_id: this.listingidValue,
         },
         customer: {
@@ -65,9 +69,7 @@ export default class extends Controller {
           name: "Rose De Bukater",
         },
         customizations: {
-          title: "Entyque",
-          description: "Payment fo an awesome cruise",
-          logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
+          title: "Enthrift",
         },
       });
     }

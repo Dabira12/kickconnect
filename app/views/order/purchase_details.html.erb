@@ -65,17 +65,18 @@
 
          <h1 class="font-bold text-l pt-8 pb-8 sm:pt-0    sm:pb=0">Delivery info</h1>
          <h1 > Status: Shipped</h1>
-          <h1 class="pt-4"> Courier: GIG Logistics</h1>
+
+          <h1 class="pt-8"> Courier: <%=@order.carrier%> </h1> 
 
 
          </div>
 
-<%if false%>
+<%if @order.is_fulfilled == true%>
          <div  class="col-span-1 sm:col-start-1 sm:col-end-3    border-b-2 pb-10 border-gray-200">
 
 
-         <h1 class="font-bold text-md pt-8  pb-8">Shipping to</h1>
-         <h1><%= @order.buyer_address %></h1>
+         <%= link_to 'Track Item', @order.terminal_carrier_tracking_url , target: '_blank', class:" flex items-center justify-center rounded-md border border-7 border-teal-700 bg-gray-50 px-4 py-3 text-base font-medium text-black"%>
+        
 
          </div>
   <%end%>

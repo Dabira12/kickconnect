@@ -3,6 +3,7 @@ class OrderController < ApplicationController
     require 'nanoid'
     require 'httparty'
     require 'json'
+    require 'twilio-ruby'
     
 
     before_action :can_purchase, only:[:pay]
@@ -33,7 +34,7 @@ class OrderController < ApplicationController
                
             
 
-               order = Order.new(listing_id:current_listing.id, buyer_id: current_user.id, seller_id:current_listing.user.id , buyer_address:@default_address, sender_address:current_listing_address, listing_price:current_listing.price, terminal_rate_id:rate_id, status:'active')
+               order = Order.new(listing_id:current_listing.id, buyer_id: current_user.id, seller_id:current_listing.user.id , buyer_address:@default_address, sender_address:current_listing_address, listing_price:current_listing.price, terminal_rate_id:rate_id, status:'active', is_fulfilled: 0)
                order.save
 
 
@@ -41,14 +42,34 @@ class OrderController < ApplicationController
                 res= JSON.parse(response.body)
                    
                 shipment_id = params[:shipment_id]
+                carrier = params[:carrier]
+
                 order.update_attribute(:terminal_shipment_id, shipment_id)
+                order.update_attribute(:carrier, carrier)
            
 
                 @status = 'successful'
 
                 current_listing.update_attribute(:is_sold, 1)
+
+
                 
-                
+               
+
+                # # Find your Account SID and Auth Token at twilio.com/console
+                # # and set the environment variables. See http://twil.io/secure
+                # account_sid = ENV['TWILIO_ACCOUNT_SID']
+                # auth_token = ENV['TWILIO_AUTH_TOKEN']
+                # @client = Twilio::REST::Client.new(account_sid, auth_token)
+
+                # message = @client.messages
+                # .create(
+                #     body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+                #     from: '+15017122661',
+                #     to: '+15558675310'
+                # )
+
+                # puts message.sid
                 
                     
 
@@ -191,6 +212,41 @@ class OrderController < ApplicationController
             @rates == [] ? @can_deliver = false : @can_deliver = true
             end
 
+            # termii_uri = URI("https://api.ng.termii.com/api/sms/send")
+
+            #     @seller = current_user.phone_number
+            # payload = {
+            #     from: 'Sale-Made',
+            #     to: '+2349032766184',
+            #     sms: "Hi there, testing Termii",
+            #     type: "plain",
+            #     channel: "generic",
+            #     api_key: "TL69UmCAmrH9rruZ8MOGtLcDUYrz88tI5NQqsJeWV1zWPgyXE5YMn7CTIaNnV6"
+            # }
+
+            # headers = { 'Content-Type': 'application/json'}
+            # response = Net::HTTP.post(termii_uri, payload.to_json, headers)
+            # res= JSON.parse(response.body)
+            # puts res
+
+
+            #    # Find your Account SID and Auth Token at twilio.com/console
+            #     # and set the environment variables. See http://twil.io/secure
+            #     account_sid = 'AC345ad7bab4ea626f7288713d746b3d4e'
+            #     auth_token = 'fe3d9ba310f270d9d5f2938c875c2cfa'
+
+            #     @seller = current_user.phone_number
+            #     @client = Twilio::REST::Client.new(account_sid, auth_token)
+
+            #     message = @client.messages
+            #     .create(
+            #         body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+            #         from: '+18777804236',
+            #         to: @seller
+            #     )
+
+            #     puts message.sid
+
     end
 
     def fulfill
@@ -235,19 +291,39 @@ class OrderController < ApplicationController
 
         # headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer sk_live_1TbW7FD0YBcPcvMks29t9OEUBskgi9UR'}
         headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer sk_test_yRZJuyWvH4HALP8upPDcoaEw3JIs0yVO'}
-        puts order.terminal_shipment_id
         response = Net::HTTP.post(uri, body.to_json, headers)
-        puts response.body
+        response_json = JSON.parse(response.body)
+        status = response_json['status']
+       
+       
+        if status == true
+            terminal_carrier_tracking_url = response_json['data']['extras']['carrier_tracking_url']
+            terminal_tracking_url = response_json['data']['extras']['tracking_url']
+            puts terminal_carrier_tracking_url
+            puts response_json['data']
+            order.update_attribute(:terminal_tracking_url, terminal_tracking_url)
+            order.update_attribute(:terminal_carrier_tracking_url, terminal_carrier_tracking_url)
+            order.update_attribute(:is_fulfilled, 1) #order updated to fulfilled
 
-        begin
-            
-        rescue 
-            puts 'yes'
+            flash[:notice] = 'A Courier has been requested, keep your phone close to you as you will get updates before your courier arrives to pickup your item and drop it off at your buyers'
+
+            redirect_to order_details_path(order.id)
+        else
 
         end
 
-            puts ('yes')
-            flash[:alert] = "Before you create a listing, you must enter your bank account details so we can pay you when your item gets sold!"
+        puts status
+
+        # begin
+        #      response = Net::HTTP.post(uri, body.to_json, headers)
+        # rescue 
+        #     puts response.body
+        # else
+        #     puts ('yes')
+
+        # end
+
+           
 
     end
 
@@ -263,6 +339,9 @@ class OrderController < ApplicationController
         order = Order.find(params[:id])
         if order.seller_id != current_user.id
             redirect_to shop_path
+        end
+        if order.is_fulfilled == true
+            redirect_to order_details_path(order.id)
         end
     end
 

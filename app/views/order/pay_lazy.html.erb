@@ -39,7 +39,9 @@
                   <% for rate in @rates%>
                     
                  
-                    <option value= <%=rate['rate_id']%> data-amount=<%=rate['amount']%> >
+                    <option value= <%=rate['rate_id']%> data-amount=<%=rate['amount']%>  data-carrier= '<%=rate["carrier_name"]%>'>
+                      <%= puts rate["carrier_name"] %>
+                    <span>
                      <%=rate['carrier_name'] %> 
                      (<%=rate['delivery_time'] %>) <span style:bold> -NGN <%= rate['amount']%> </span>
                    

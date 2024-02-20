@@ -31,7 +31,7 @@ class ListingsController < ApplicationController
   end
 
   def sold
-    @listings = Listing.where(is_sold: true, user_id: current_user.id)
+    @orders = Order.where( seller_id: current_user.id).order("created_at ASC")
   end
 
   def show

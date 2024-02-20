@@ -134,12 +134,12 @@ document.addEventListener("turbolinks:click",()=>{
                       <%= button_to "Delete Listing", @listing, method: :delete,class:"mt-8 flex w-full items-center justify-center rounded-md border border-5 border-teal-700 bg-white px-8 py-3 text-base font-medium text-red-500", data:{turbo_confirm:"Are you sure you want to delete your listing?"}%>
 
              <%elsif @listing.is_sold == true && current_user.id == @listing.user_id%>
-              <h1> This listing has been sold</h1>
+              <h1 class="pt-4 text-xl font-bold text-red-900"> This item has been sold</h1>
 
 
              <%else%>
 
-             <h1> This listing has been sold</h1>
+              <h1 class="pt-4 text-xl font-bold text-red-900"> This item has been sold</h1>
 
 
           <%end%>

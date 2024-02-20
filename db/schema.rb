@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_05_192000) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_20_203455) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -131,6 +131,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_05_192000) do
     t.string "buyer_address"
     t.string "terminal_rate_id"
     t.string "terminal_shipment_id"
+    t.boolean "is_fulfilled"
+    t.string "terminal_carrier_tracking_url"
+    t.string "terminal_tracking_url"
+    t.string "carrier"
   end
 
   create_table "users", force: :cascade do |t|

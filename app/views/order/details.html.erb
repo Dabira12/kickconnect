@@ -36,15 +36,15 @@
                <tbody>
   <tr >
 
-    <td>Sold price</td>
-    <td><%= @order.listing.price%></td>
+    <td>Item price</td>
+    <td><%= @order.listing.price%> NGN</td>
 
   </tr>
   
    
    <tr >
-    <td>Yara service fee</td>
-    <td>4200</td>
+    <td>Service fee</td>
+    <td>4200 NGN</td>
   </tr>
 
    <tr >
@@ -71,14 +71,18 @@
 
          </div>
 
-
+        <%if @order.is_fulfilled == true%>
          <div  class="col-span-1 sm:col-start-1 sm:col-end-3    border-b-2 pb-10 border-gray-200">
 
 
-         <h1 class="font-bold text-md pt-8  pb-8">Shipping details</h1>
-         <h1><%= @order.buyer_address %></h1>
+         <%= link_to 'Track Item', @order.terminal_carrier_tracking_url , target: '_blank',class:" flex items-center justify-center rounded-md border border-7 border-teal-700 bg-gray-50 px-4 py-3 text-base font-medium text-black"%>
+        
 
          </div>
+  <%end%>
+         
+
+        
     
     </div>
 </div>
