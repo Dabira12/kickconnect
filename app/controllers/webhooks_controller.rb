@@ -24,10 +24,12 @@ class WebhooksController < ApplicationController
   def create
     @webhook = Webhook.new(webhook_params)
     @webhook.source = params[:source]
-    @webhook.data = params.except(:controller, :action)
-
+    @webhook.event = params[:event]
+    
+    @webhook.data = params[:data]
   
       if @webhook.save
+        WebhookJob.perform_later(@webhook)
        
        
         render json: {status: :ok}, status: :ok
@@ -69,6 +71,6 @@ class WebhooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def webhook_params
-      params.permit(:source, :message, :event)
+      params.permit(:source, :message, :event, :data)
     end
 end

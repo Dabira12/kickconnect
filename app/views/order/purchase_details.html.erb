@@ -64,7 +64,8 @@
 
 
          <h1 class="font-bold text-l pt-8 pb-8 sm:pt-0    sm:pb=0">Delivery info</h1>
-         <h1 > Status: Shipped</h1>
+          <h1> Status: <%= show_status_buyer(@order.status) %></h1>
+
 
           <h1 class="pt-8"> Courier: <%=@order.carrier%> </h1> 
 

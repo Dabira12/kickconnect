@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-   
    before_action :set_current_user
    before_action :store_location
    before_action :configure_permitted_parameters, if: :devise_controller?

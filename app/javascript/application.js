@@ -7,6 +7,7 @@ import "@hotwired/turbo-rails";
 Turbo.session.drive = false; // turns off turbo for application. To use turbo on a page add data-turbo="true" to div. This was done because turbo affect the carousel
 
 import "@hotwired/stimulus";
+import "./add_jquery";
 
 import "./controllers";
 import * as ActiveStorage from "@rails/activestorage";

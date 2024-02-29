@@ -7,6 +7,14 @@ end
 def create
 end
 
+def current_user_email
+
+  if current_user!= nil
+    render json: {current_user_email: current_user.email}, status: 200
+
+  end
+
+end
 def update
     @user = User.find(current_user.id)
     if @user.update(user_params)

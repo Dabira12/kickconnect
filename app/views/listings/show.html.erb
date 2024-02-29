@@ -31,20 +31,20 @@ document.addEventListener("turbolinks:click",()=>{
   <!-- Additional required wrapper -->
   <div class="swiper-wrapper">
     <!-- Slides -->
-    <div class="swiper-slide"> <%=image_tag @listing.cover_photo.variant(resize_and_pad: [525, 700,background: [242, 242, 242]]), loading:'eager'%> </div>
+    <div class="swiper-slide"> <%=image_tag @listing.cover_photo.variant(:large) %> </div>
 
     <% if @listing.supporting_photo_one.attached?%>
-      <div class="swiper-slide"> <%=image_tag @listing.supporting_photo_one.variant(resize_to_fill: [525, 700]), loading:'eager'%> </div>
+      <div class="swiper-slide"> <%=image_tag @listing.supporting_photo_one.variant(:large)%> </div>
 
    <%end%>
 
    <% if @listing.supporting_photo_two.attached?%>
-      <div class="swiper-slide"> <%=image_tag @listing.supporting_photo_two.variant(resize_to_fill: [525, 700])%> </div>
+      <div class="swiper-slide"> <%=image_tag @listing.supporting_photo_two.variant(:large)%> </div>
 
    <%end%>
    
    <% if @listing.supporting_photo_three.attached?%>
-      <div class="swiper-slide"> <%=image_tag @listing.supporting_photo_three.variant(resize_to_fill: [525, 700])%> </div>
+      <div class="swiper-slide"> <%=image_tag @listing.supporting_photo_three.variant(:large)%> </div>
 
    <%end%>
    

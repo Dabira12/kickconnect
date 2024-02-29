@@ -6,43 +6,47 @@ class Listing < ApplicationRecord
     # def addresses_id=(val)
     #     puts add
     #   end
-
-
-   
+    enum :status, {sold: "sold", in_transit: "in_transit", delivered: "delivered", refund_request: "refund_request", refund_issued: "refund_issued"}
 
     has_one_attached :cover_photo do |attachable|
-        # attachable.variant :medium, resize_to_limit:[300,100]
-        # attachable.variant :large, resize_to_limit:[1200,1000]
+    #    attachable.variant :large, resize_and_pad: [525, 700,background: [242, 242, 242]]
+    #    attachable.variant :medium, resize_and_pad: [350, 390 ,background: [242, 242, 242]]
+
+        attachable.variant :medium, resize_to_limit:[350,390]
+        attachable.variant :large, resize_to_limit:[525,700]
     end
 
     has_one_attached :supporting_photo_one do |attachable|
+        attachable.variant :large, resize_to_limit:[525,700]
        
-        # attachable.variant :large, resize_to_limit:[1200,1000]
+    #    attachable.variant :large, resize_and_pad: [525, 700,background: [242, 242, 242]]
+      
     end
 
     has_one_attached :supporting_photo_two do |attachable|
      
-        # attachable.variant :large, resize_to_limit:[1200,1000]
+        # attachable.variant :large, resize_and_pad: [525, 700,background: [242, 242, 242]]
+        attachable.variant :large, resize_to_limit:[525,700]
     end
 
     has_one_attached :supporting_photo_three do |attachable|
         
-        # attachable.variant :large, resize_to_limit:[1200,1000]
+        attachable.variant :large, resize_and_pad: [525, 700,background: [242, 242, 242]]
     end
 
     has_one_attached :supporting_photo_four do |attachable|
        
-        # attachable.variant :large, resize_to_limit:[1200,1000]
+        attachable.variant :large, resize_and_pad: [525, 700,background: [242, 242, 242]]
     end
 
     has_one_attached :supporting_photo_five do |attachable|
        
-        # attachable.variant :large, resize_to_limit:[1200,1000]
+        attachable.variant :large, resize_and_pad: [525, 700,background: [242, 242, 242]]
     end
 
     has_one_attached :supporting_photo_six do |attachable|
        
-        # attachable.variant :large, resize_to_limit:[1200,1000]
+        attachable.variant :large, resize_and_pad: [525, 700,background: [242, 242, 242]]
     end
 
     validates :name, presence: true

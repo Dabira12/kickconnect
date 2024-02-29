@@ -16,7 +16,7 @@
               
                   <%= link_to listing_path(listing.id) do%>  
 
-                      <%=image_tag listing.cover_photo.variant(resize_and_pad: [350, 390 ,background: [242, 242, 242]])  %>
+                      <%=image_tag listing.cover_photo.variant(:medium)  %>
 
                      
 

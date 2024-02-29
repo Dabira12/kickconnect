@@ -1,9 +1,10 @@
 class ListingsController < ApplicationController
   include ListingHelper
+  include ApplicationHelper
 
   require 'phonelib'
   require 'json'
-  
+  # before_action :authenticate_user!
   # before_action :can_edit_listing, only:[:edit]
   before_action :signed_in, only:[:new, :edit, :sale]
   before_action :can_edit_listing, only:[ :edit]
@@ -34,19 +35,34 @@ class ListingsController < ApplicationController
     @orders = Order.where( seller_id: current_user.id).order("created_at ASC")
   end
 
-  def show
-    @listing = Listing.find(params[:id])
+  def get_listing_price
+    if Listing.exists?(params[:id])
+      listing = Listing.find(params[:id])
+      puts listing.price
+      price = (listing.price)
+      
+      render json: {price: price}, status: 200
+    end 
+  end
 
-   
+  def show
+
+    if Listing.exists?(params[:id])
+      @listing = Listing.find(params[:id])
+      # num = current_user.phone_number
+      # send_text_termii(num)
+    else
+      redirect_to shop_path
+    end
+    
+ 
 
   end 
 
   def show_all
     # valid_exp =~ /(7|8|9){1}(0|1){1}[0–9]{8}\
 
-   phone = Phonelib.parse('0802337754885','NG') 
-
-   puts phone.e164
+   puts current_user
     # puts '8023377545'.match?(valid_exp)
 
    

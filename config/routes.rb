@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   post 'dev/webhooks/:source', to: "webhooks#create"
 
   put 'order/request_courier/:id', to:'order#request_courier', as: :request_courier
-
+  get 'order/make_payment', to:'order#make_payment', as: :make_payment
+  
+  get 'current_user_email', to: "users#current_user_email", as: :current_user_email
+  get  'listing/get_listing_price/:id', to: "listings#get_listing_price", as: :get_listing_price
   resources :listings do
     collection do
       get :departments
@@ -58,7 +61,7 @@ Rails.application.routes.draw do
 
   get 'home/sell', to:'home#sell'
 
-  get '/:username', to: 'listings#storefront', as: :storefront
+  get '/:username', to: 'listings#storefront', as: :storefront #this route must be at the bottom
 
 
 

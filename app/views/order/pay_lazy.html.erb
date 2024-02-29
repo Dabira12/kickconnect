@@ -2,6 +2,25 @@
 
 
 <%= turbo_frame_tag :pay_lazy do %>
+  <%# <div>
+  <iframe style="position: fixed; top: 0px; left: 0px; z-index: 2147483647; border: none; opacity: 1; width: 100%; height: 100%;" allowtransparency="false", allowfullscreen="true" width="100%" height="100%" name="checkout" src="https://checkout.paystack.com/zeb15pkn3em2mmv" ></iframe>
+  </div> %>
+
+
+    <script >
+    function trye(){
+      console.log($("#courierSelect").find(":selected").val())
+      let path = '<%= make_payment_path('test')%>'
+      const response = await fetch(path, { 
+          method: 'PUT', 
+          headers: { 
+            'Content-type': 'application/json'
+          }, 
+          body: JSON.stringify(data) 
+        }); 
+    }
+
+    </script>
 <div class="  bg-white container mx-auto  px-4 pb-24 pt-16 sm:px-6 lg:px-8"  >
     <%# <meta name="turbo-visit-control" content="reload">
     <%= turbo_page_requires_reload %> 
@@ -34,7 +53,7 @@
               <% if @can_deliver == true%>
                 <div class="font-bold">
                   <label for="location" class="block text-sm font-medium leading-6 text-gray-900">Please select a courier for shipping</label>
-                  <select data-general-target="courierSelect"  name="location" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6", data-action="change->general#onCourierSelect" >
+                  <select data-general-target="courierSelect" id="courierSelect" name="location" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6", data-action="change->general#onCourierSelect" >
                   <option data-amount= <%=nil%>> </option>
                   <% for rate in @rates%>
                     
@@ -57,6 +76,7 @@
                 </div>
 
                                     <button type="button" data-action="click->general#makePayment"  class="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-teal-700 px-8 py-3 text-base font-medium text-white ">Pay Now</button>
+                                    <%# <%=button_to 'Arrange Shippping', make_payment_path('yes'),method: :put,  class:"mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-teal-700 px-8 py-3 text-base font-medium text-white "%> 
 
 
               <% else %>
