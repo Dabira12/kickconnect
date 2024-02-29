@@ -12,12 +12,13 @@ class Listing < ApplicationRecord
     #    attachable.variant :large, resize_and_pad: [525, 700,background: [242, 242, 242]]
     #    attachable.variant :medium, resize_and_pad: [350, 390 ,background: [242, 242, 242]]
 
-        attachable.variant :medium, resize_to_limit:[350,390]
-        attachable.variant :large, resize_to_limit:[525,700]
+        attachable.variant :medium, resize_to_limit:[350,390], format: :jpeg, saver: { subsample_mode: "on", strip: true, interlace: true, quality: 60 }
+        attachable.variant :large, resize_to_limit:[525,700], format: :jpeg, saver: { subsample_mode: "on", strip: true, interlace: true, quality: 60 }
+        # attachable.variant :large, resize_to_limit:[525,700]
     end
 
     has_one_attached :supporting_photo_one do |attachable|
-        attachable.variant :large, resize_to_limit:[525,700]
+        attachable.variant :large, resize_to_limit:[525,700], format: :jpeg, saver: { subsample_mode: "on", strip: true, interlace: true, quality: 60 }
        
     #    attachable.variant :large, resize_and_pad: [525, 700,background: [242, 242, 242]]
       
@@ -26,7 +27,7 @@ class Listing < ApplicationRecord
     has_one_attached :supporting_photo_two do |attachable|
      
         # attachable.variant :large, resize_and_pad: [525, 700,background: [242, 242, 242]]
-        attachable.variant :large, resize_to_limit:[525,700]
+        attachable.variant :large, resize_to_limit:[525,700], format: :jpeg, saver: { subsample_mode: "on", strip: true, interlace: true, quality: 60 }
     end
 
     has_one_attached :supporting_photo_three do |attachable|
