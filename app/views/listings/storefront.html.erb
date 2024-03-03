@@ -59,7 +59,7 @@
                             <div class= "flex flex-col gap-y-0">
                              <%= link_to listing_path(listing.id) do%>  
                                     <div class="display:none">
-                                    <%=image_tag listing.cover_photo.variant(resize_and_pad: [210, 210,background: [242, 242, 242]]) , loading: "lazy"%>
+                                    <%=image_tag listing.cover_photo.variant(:medium)%>
                                     </div>
                                 <%end%>
                                    
