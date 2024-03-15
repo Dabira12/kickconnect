@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :refunds, except: [:new]
+  get 'refunds/new/:order_id', to:"refunds#new"
   resources :webhooks, only: [:create,:index,:show, :destroy]
   post 'dev/webhooks/:source', to: "webhooks#create"
 

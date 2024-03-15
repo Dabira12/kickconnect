@@ -1,0 +1,189 @@
+<%= form_with(model: refund, class: "contents") do |form| %>
+  <% if refund.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(refund.errors.count, "error") %> prohibited this refund from being saved:</h2>
+
+      <ul>
+        <% refund.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div  data-controller="previews" >
+  <div class="my-5">
+    <%= form.label :description, 'What is your reason for requesting a refund?' %>
+    <%= form.text_area :description, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+   <%= form.hidden_field :resolved, value: 0 %> 
+
+ 
+
+
+    <div class = " grid gap-x-4 gap-y-8 grid-cols-6 sm:grid-cols-6">
+
+
+        <div class="col-span-2 mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 ">
+            <div class="text-center">
+              <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+              </svg>
+                    
+              <div class="mt-4 flex text-sm leading-6 text-gray-600 ">
+                  <%= form.file_field :supporting_photo_one,  data:{previews_target:"input", action:"change->previews#preview"}  , direct_upload: true%>
+
+              <% if refund.supporting_photo_one.attached?%>
+                  <div class=" object-cover">
+                        <%= image_tag refund.supporting_photo_one, data:{previews_target:"preview"},style:"sm:h-1/2"%>
+                      </div>
+              <%else%>
+                          <%= image_tag " ", data:{previews_target:"preview"},style:"width:col-span-4 ; height: auto"%>
+              <%end%>
+              </div>
+                       <p class="text-xs leading-5 text-gray-600">or drag and drop</p>
+                      <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+              </div>
+
+  
+        </div>
+        <div class="col-span-2"  data-controller="previews" >
+        <div class=" mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 ">
+            <div class="text-center">
+              <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+              </svg>
+                    
+              <div class="mt-4 flex text-sm leading-6 text-gray-600 ">
+                  <%= form.file_field :supporting_photo_two,  data:{previews_target:"input", action:"change->previews#preview"}  , direct_upload: true%>
+
+              <% if refund.supporting_photo_two.attached?%>
+                  <div class=" object-cover">
+                        <%= image_tag refund.supporting_photo_two, data:{previews_target:"preview"},style:"sm:h-1/2"%>
+                      </div>
+              <%else%>
+                          <%= image_tag " ", data:{previews_target:"preview"},style:"width:col-span-4 ; height: auto"%>
+              <%end%>
+              </div>
+                       <p class="text-xs leading-5 text-gray-600">or drag and drop</p>
+                      <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+              </div>
+
+  
+        </div>
+        </div>
+
+
+         <div class="col-span-2"  data-controller="previews" >
+         <div class=" mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 ">
+            <div class="text-center">
+              <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+              </svg>
+                    
+              <div class="mt-4 flex text-sm leading-6 text-gray-600 ">
+                  <%= form.file_field :supporting_photo_three,  data:{previews_target:"input", action:"change->previews#preview"}  , direct_upload: true%>
+
+              <% if refund.supporting_photo_three.attached?%>
+                  <div class=" object-cover">
+                        <%= image_tag refund.supporting_photo_three, data:{previews_target:"preview"},style:"sm:h-1/2"%>
+                      </div>
+              <%else%>
+                          <%= image_tag " ", data:{previews_target:"preview"},style:"width:col-span-4 ; height: auto"%>
+              <%end%>
+              </div>
+                       <p class="text-xs leading-5 text-gray-600">or drag and drop</p>
+                      <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+              </div>
+        </div>
+        </div>
+         <div class="col-span-2"  data-controller="previews" >
+         <div class=" mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 ">
+            <div class="text-center">
+              <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+              </svg>
+                    
+              <div class="mt-4 flex text-sm leading-6 text-gray-600 ">
+                  <%= form.file_field :supporting_photo_four,  data:{previews_target:"input", action:"change->previews#preview"}  , direct_upload: true%>
+
+              <% if refund.supporting_photo_four.attached?%>
+                  <div class=" object-cover">
+                        <%= image_tag refund.supporting_photo_four, data:{previews_target:"preview"},style:"sm:h-1/2"%>
+                      </div>
+              <%else%>
+                          <%= image_tag " ", data:{previews_target:"preview"},style:"width:col-span-4 ; height: auto"%>
+              <%end%>
+              </div>
+                       <p class="text-xs leading-5 text-gray-600">or drag and drop</p>
+                      <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+              </div>
+
+  
+        </div>
+        </div>
+        <div class="col-span-2"  data-controller="previews" >
+         <div class=" mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 ">
+            <div class="text-center">
+              <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+              </svg>
+                    
+              <div class="mt-4 flex text-sm leading-6 text-gray-600 ">
+                  <%= form.file_field :supporting_photo_five,  data:{previews_target:"input", action:"change->previews#preview"}  , direct_upload: true%>
+
+              <% if refund.supporting_photo_five.attached?%>
+                  <div class=" object-cover">
+                        <%= image_tag refund.supporting_photo_five, data:{previews_target:"preview"},style:"sm:h-1/2"%>
+                      </div>
+              <%else%>
+                          <%= image_tag " ", data:{previews_target:"preview"},style:"width:col-span-4 ; height: auto"%>
+              <%end%>
+              </div>
+                       <p class="text-xs leading-5 text-gray-600">or drag and drop</p>
+                      <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+              </div>
+
+  
+        </div>
+        </div>
+
+         <div class="col-span-2"  data-controller="previews" >
+          <div class=" mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 ">
+            <div class="text-center">
+              <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+              </svg>
+                    
+              <div class="mt-4 flex text-sm leading-6 text-gray-600 ">
+                  <%= form.file_field :supporting_photo_six,  data:{previews_target:"input", action:"change->previews#preview"}  , direct_upload: true%>
+
+              <% if refund.supporting_photo_six.attached?%>
+                  <div class=" object-cover">
+                        <%= image_tag refund.supporting_photo_six, data:{previews_target:"preview"},style:"sm:h-1/2"%>
+                      </div>
+              <%else%>
+                          <%= image_tag " ", data:{previews_target:"preview"},style:"width:col-span-4 ; height: auto"%>
+              <%end%>
+              </div>
+                       <p class="text-xs leading-5 text-gray-600">or drag and drop</p>
+                      <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+              </div>
+
+  
+        </div>
+        </div>
+
+
+
+    </div>
+
+    
+
+
+  
+</div>
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

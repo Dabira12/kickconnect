@@ -19,7 +19,7 @@
   </div>
 
 
-
+<%if false%>
   <div class="field pt-4" >
     <%= f.label :phone_number , class:"block text-sm font-medium leading-6 text-gray-900"  %>
     
@@ -29,6 +29,7 @@
     </div>
   
   </div>
+<%end%>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>

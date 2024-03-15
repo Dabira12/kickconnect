@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_20_203455) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_06_212008) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -137,6 +137,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_20_203455) do
     t.string "carrier"
   end
 
+  create_table "refunds", force: :cascade do |t|
+    t.text "description"
+    t.boolean "resolved"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_refunds_on_order_id"
+    t.index ["user_id"], name: "index_refunds_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -168,4 +179,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_20_203455) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bank_accounts", "users"
   add_foreign_key "listings", "addresses", column: "addresses_id"
+  add_foreign_key "refunds", "orders"
+  add_foreign_key "refunds", "users"
 end

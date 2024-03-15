@@ -6,7 +6,6 @@ class Listing < ApplicationRecord
     # def addresses_id=(val)
     #     puts add
     #   end
-    enum :status, {sold: "sold", in_transit: "in_transit", delivered: "delivered", refund_request: "refund_request", refund_issued: "refund_issued"}
 
     has_one_attached :cover_photo do |attachable|
     #    attachable.variant :large, resize_and_pad: [525, 700,background: [242, 242, 242]]

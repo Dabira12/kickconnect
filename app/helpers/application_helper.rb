@@ -39,13 +39,13 @@ module ApplicationHelper
 
       termii_uri = URI("https://api.ng.termii.com/api/sms/send")
 
-                @seller = current_user.phone_number
+               
             payload = {
-                from: 'Enthrift',
+                from: 'N-alert',
                 to: to,
                 sms: "Hi there, testing Termii",
                 type: "plain",
-                channel: "generic",
+                channel: "dnd",
                 api_key: "TL69UmCAmrH9rruZ8MOGtLcDUYrz88tI5NQqsJeWV1zWPgyXE5YMn7CTIaNnV6"
             }
 

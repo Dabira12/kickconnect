@@ -51,12 +51,20 @@ class ListingsController < ApplicationController
       @listing = Listing.find(params[:id])
       # num = current_user.phone_number
       # send_text_termii(num)
+      respond_to do |format|
+        format.html 
+        format.json { render json:@listing,status: :ok }
+      end
     else
-      redirect_to shop_path
+      respond_to do |format|
+        format.html {redirect_to shop_path}
+        format.json { render json: {message: 'listing not found'}, status: :unprocessable_entity}
+      end
+     
+     
+      
     end
     
- 
-
   end 
 
   def show_all

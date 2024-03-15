@@ -9,9 +9,9 @@ class User < ApplicationRecord
   before_save :downcase_fields, :phoneToInternational
 
   # validates :phone_number, phone:{possible:true,countries: :ng }
-  validates :phone_number, presence: true
+  # validates :phone_number, presence: true
 
-  validate :phone_number_check
+  # validate :phone_number_check
 
 
   def phone_number_check
