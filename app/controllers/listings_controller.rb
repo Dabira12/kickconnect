@@ -32,7 +32,7 @@ class ListingsController < ApplicationController
   end
 
   def sold
-    @orders = Order.where( seller_id: current_user.id).order("created_at ASC")
+    @orders = Order.where( seller_id: current_user.id).order("created_at DESC")
   end
 
   def get_listing_price
@@ -49,6 +49,21 @@ class ListingsController < ApplicationController
 
     if Listing.exists?(params[:id])
       @listing = Listing.find(params[:id])
+
+    # headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer sk_test_yRZJuyWvH4HALP8upPDcoaEw3JIs0yVO' }
+    # uri = URI('https://sandbox.terminal.africa/v1/shipments/'+ "SH-9BL20PA88XR4YBLB")
+    # response = Net::HTTP.get_response(uri, headers)
+   
+    # response_json = JSON.parse(response.body)
+    # puts "oooo"
+    # puts response_json['data']
+    # listing_id = response_json["data"]["metadata"]["listing_id"]
+    # puts listing_id
+    # buyer_id = response_json["data"]["metadata"]["buyer_id"]
+    # puts buyer_id
+    # phone_number = User.find(buyer_id).phone_number
+    
+    # puts phone_number
       # num = current_user.phone_number
       # send_text_termii(num)
       respond_to do |format|

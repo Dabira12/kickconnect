@@ -35,15 +35,15 @@ module ApplicationHelper
         return ORDER_STATUS_BUYER[value]
       end
 
-      def send_text_termii(to)
+      def send_text_termii(number,message)
 
       termii_uri = URI("https://api.ng.termii.com/api/sms/send")
 
                
             payload = {
                 from: 'N-alert',
-                to: to,
-                sms: "Hi there, testing Termii",
+                to: number,
+                sms: message,
                 type: "plain",
                 channel: "dnd",
                 api_key: "TL69UmCAmrH9rruZ8MOGtLcDUYrz88tI5NQqsJeWV1zWPgyXE5YMn7CTIaNnV6"

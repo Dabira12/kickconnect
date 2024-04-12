@@ -66,7 +66,7 @@ class OrderController < ApplicationController
 
                 current_listing.update_attribute(:is_sold, 1)
 
-                send_text_termii(seller_phone_number) #method from application helper
+                # send_text_termii(seller_phone_number) #method from application helper
 
 
                     
@@ -114,23 +114,41 @@ class OrderController < ApplicationController
         current_listing_address = Address.find(current_listing.addresses_id)
        
        
-      
+        @user_id = @user.id
+        @listing_id = @listing.id
 
         @addresses = Address.where(user_id:current_user.id)
         @default_address = Address.find_by(user_id:current_user.id, id:current_user.default_address_id)
+        puts @default_address.line1
         @address_exists = current_user.addresses.any?
+        puts @address_exists
+        
         if @default_address !=nil
             
 
             # uri = URI('https://api.terminal.africa/v1/shipments/quick')
             uri = URI('https://sandbox.terminal.africa/v1/shipments/quick')
+            puts @default_address.phone_number
+            puts @default_address.country_code
+            puts @default_address.state
+            if @default_address.country_code == 'US'
+                number = '+12025886500'
+            elsif @default_address.country_code == 'CA'
+                number = '+16474732001'
+            elsif @default_address.country_code == 'GB'
+                number = '+442071234567'
+            elsif @default_address.country_code == 'NG'
+                number = '+2349032766184'
+            end
+            puts @default_address.country_code
+            puts number
             body = {    
                 delivery_address: {
                         
                             city: @default_address.city,
                         
                             country: @default_address.country_code,
-                            email: @default_address.phone_number,
+                            email: @current_user.email,
                             first_name: @default_address.first_name,
                             
                             last_name: @default_address.last_name,
@@ -138,7 +156,8 @@ class OrderController < ApplicationController
 
                             line2: @default_address.line2,
                         
-                            phone: @default_address.phone_number,
+                            # phone: @default_address.phone_number,
+                            phone: number,
                             
                             state: @default_address.state,
                         
@@ -160,7 +179,8 @@ class OrderController < ApplicationController
                             zip: current_listing_address.zipcode,
                             
                         },
-                        metadata:"{'buyer_id': #{@user.id}, 'listing_id': #{@listing.id} }",
+                        # metadata:"{'buyer_id': #{@user.id}, 'listing_id': #{@listing.id} }",
+                        metadata:{buyer_id: @user_id, listing_id:@listing_id},
             parcel:{
                     description: 'clothing',
                 
@@ -190,6 +210,7 @@ class OrderController < ApplicationController
             response = Net::HTTP.post(uri, body.to_json, headers)
 
             res= JSON.parse(response.body)
+            puts res
             
             @shipment_id = res['data']['shipment_id']
             puts @shipment_id
@@ -340,6 +361,7 @@ class OrderController < ApplicationController
         order = Order.find(params[:id])
         body = {
             rate_id: order.terminal_rate_id,
+            shipment_id: order.terminal_shipment_id,
         }
 
         # headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer sk_live_1TbW7FD0YBcPcvMks29t9OEUBskgi9UR'}
@@ -347,6 +369,7 @@ class OrderController < ApplicationController
         response = Net::HTTP.post(uri, body.to_json, headers)
        
         response_json = JSON.parse(response.body)
+        
         status = response_json['status']
        
        

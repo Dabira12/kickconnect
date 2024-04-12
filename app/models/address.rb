@@ -9,7 +9,7 @@ class Address < ApplicationRecord
     # validates :line1, presence: true
     private
         def try
-            street_number, locality, route, neighborhood, administrative_area_level_1, administrative_area_level_2, administrative_area_level_3, zipcode = nil
+            street_number, locality, route, neighborhood, administrative_area_level_1, administrative_area_level_2, administrative_area_level_3, zipcode,country_code = nil
             # locality = nil
             # route = nil
             # neighborhood = nil
@@ -26,7 +26,10 @@ class Address < ApplicationRecord
 
                 for component in address_components
                     puts component
-                    if component['types'].include?('street_number') == true
+                    if component['types'].include?('country') == true
+                        country_code = component['short_name']
+
+                    elsif component['types'].include?('street_number') == true
                         street_number = component['long_name']
                         
                     elsif component['types'].include?('route') == true
@@ -49,18 +52,22 @@ class Address < ApplicationRecord
                     
 
                     elsif component['types'].include?('administrative_area_level_1') == true
+                        puts 'merk'
                         if component['long_name'] == 'Federal Capital Territory'
 
                             administrative_area_level_1_short_name = 'FC'
                             administrative_area_level_1 = 'Abuja'
 
                         else
-
+                            administrative_area_level_1 = component['long_name']
                             for state in states
-                                administrative_area_level_1 = component['long_name']
+                                
                                 if state['name'] == administrative_area_level_1
                                     administrative_area_level_1_short_name = state['isoCode']
+                                    break
                                 end
+
+                                administrative_area_level_1_short_name = component['short_name']
 
                             end
                         
@@ -87,13 +94,17 @@ class Address < ApplicationRecord
                 self.state = administrative_area_level_1
                 self.state_code = administrative_area_level_1_short_name
                 self.zipcode = zipcode
-                self.country_code = 'NG'
-
-                puts neighborhood
+                self.country_code = country_code
+                puts locality
+                puts street_number
+                puts 'yh'
+                puts administrative_area_level_1_short_name
+                puts self.state_code
+                puts self.country_code
                 puts 'oh oh '
 
 
-                url = URI("https://api.terminal.africa/v1/cities?country_code=NG&state_code=" + self.state_code)
+                url = URI("https://api.terminal.africa/v1/cities?country_code=" + self.country_code+ "&state_code=" + self.state_code)
 
                 http = Net::HTTP.new(url.host, url.port);
                 http.use_ssl = true
@@ -102,6 +113,7 @@ class Address < ApplicationRecord
             
                 response = http.request(request)
                 cities = JSON.parse(response.read_body)['data']
+                puts cities
 
                 for city in cities
                     if city['name'] == administrative_area_level_2

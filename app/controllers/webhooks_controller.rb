@@ -71,6 +71,10 @@ class WebhooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def webhook_params
-      params.permit(:source, :message, :event, :data)
+    #   params.require(:webhook).permit(:source, :message, :event).tap do |whitelisted|
+    #     whitelisted[:data] = params[:webhook][:data]
+    #   end
+      # params.require(:webhook).slice(:source, :message, :event, :data)
+      params.require(:webhook).permit(:source, :message, :event, data:[])
     end
 end
