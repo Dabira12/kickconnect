@@ -119,7 +119,7 @@ class OrderController < ApplicationController
 
         @addresses = Address.where(user_id:current_user.id)
         @default_address = Address.find_by(user_id:current_user.id, id:current_user.default_address_id)
-        puts @default_address.line1
+        
         @address_exists = current_user.addresses.any?
         puts @address_exists
         
